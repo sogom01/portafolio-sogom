@@ -28,38 +28,65 @@ const principles = [
   description="Juan Sebastián Osorio (sogom) — desarrollador web colombiano. Construyo sitios cuidados, rápidos y seguros para personas y negocios reales."
 >
   <section class="py-12 sm:py-20">
-    <p
-      class="fade-in-up mb-6 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase"
-    >
-      Sobre mí
-    </p>
-    <h1
-      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
-    >
-      Trabajo con la <span class="italic-accent">cabeza fría</span> y la atención al detalle de quien
-      estudia seguridad.
-    </h1>
+    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+      <!-- Columna izquierda: texto -->
+      <div>
+        <p
+          class="fade-in-up eyebrow-dot mb-6 inline-flex items-center text-xs font-medium tracking-wider uppercase"
+        >
+          Sobre mí
+        </p>
+        <h1
+          class="fade-in-up fade-in-up-delay-1 text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+        >
+          Trabajo con la <span class="italic-accent">cabeza fría</span> y la atención al detalle de
+          quien estudia seguridad.
+        </h1>
 
-    <div
-      class="fade-in-up fade-in-up-delay-2 mt-10 max-w-2xl space-y-6 text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
-    >
-      <p>
-        Me llamo <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
-          >Juan Sebastián Osorio</strong
-        >, colombiano, y mi día se reparte entre escribir páginas web y estudiar cómo se rompen las
-        que no están bien hechas. Esa mezcla rara es justo lo que define mi forma de trabajar.
-      </p>
-      <p>
-        Cuando hago una web para alguien, no estoy solo "diseñando bonito". Pienso en cada
-        formulario como una puerta que puede abrir un atacante. Pienso en cada imagen como un
-        kilobyte extra que ralentiza la página. Pienso en cada visitante como una persona real con
-        prisa y un móvil viejo.
-      </p>
-      <p>
-        Estoy en el inicio de mi camino freelance. Eso significa precios accesibles y, sobre todo,
-        una atención al detalle que no encuentras en agencias grandes con quince clientes a la vez.
-        Aquí tú no eres un número.
-      </p>
+        <div
+          class="fade-in-up fade-in-up-delay-2 mt-10 space-y-6 text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+        >
+          <p>
+            Me llamo <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+              >Juan Sebastián Osorio</strong
+            >, colombiano, y mi día se reparte entre escribir páginas web y estudiar cómo se rompen
+            las que no están bien hechas. Esa mezcla rara es justo lo que define mi forma de
+            trabajar.
+          </p>
+          <p>
+            Cuando hago una web para alguien, no estoy solo "diseñando bonito". Pienso en cada
+            formulario como una puerta que puede abrir un atacante. Pienso en cada imagen como un
+            kilobyte extra que ralentiza la página. Pienso en cada visitante como una persona real
+            con prisa y un móvil viejo.
+          </p>
+          <p>
+            Estoy en el inicio de mi camino freelance. Eso significa precios accesibles y, sobre
+            todo, una atención al detalle que no encuentras en agencias grandes con quince clientes
+            a la vez. Aquí tú no eres un número.
+          </p>
+        </div>
+      </div>
+
+      <!-- Columna derecha: foto profesional -->
+      <div class="fade-in-up fade-in-up-delay-1 relative lg:sticky lg:top-24">
+        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--color-border)] dark:bg-[var(--color-border-dark)]">
+          <img
+            src="/juan-sebastian.webp"
+            alt="Juan Sebastián Osorio, desarrollador web, sonriendo en un espacio de trabajo"
+            width="800"
+            height="1000"
+            loading="eager"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <!-- Marco decorativo offset detrás de la foto (estilo editorial) -->
+        <div
+          aria-hidden="true"
+          class="absolute -right-3 -bottom-3 -z-10 hidden h-full w-full rounded-2xl border border-[var(--color-accent)]/30 lg:block"
+        >
+        </div>
+      </div>
     </div>
   </section>
 

@@ -23,7 +23,7 @@ const {
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? 'https://portafoliosogom.vercel.app';
 const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageAbs = new URL(ogImage, siteUrl).toString();
-const fullTitle = title === 'Inicio' ? 'sogom · Juan Sebastián Osorio' : `${title} · sogom`;
+const fullTitle = title === 'Inicio' ? 'SOGOM  · Juan Sebastián Osorio Gómez' : `${title} · SOGOM`;
 ---
 
 <!doctype html>
@@ -56,9 +56,9 @@ const fullTitle = title === 'Inicio' ? 'sogom · Juan Sebastián Osorio' : `${ti
          Otros headers (CSP, X-Frame-Options, etc.) van en vercel.json. -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- Theme color: coordina con el tema actual del navegador (mobile). -->
+    <!-- Theme color: barra del navegador en móvil. Coordinado con la paleta del sitio. -->
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 
     <!-- Canonical para SEO. -->
     <link rel="canonical" href={canonical} />
@@ -77,8 +77,9 @@ const fullTitle = title === 'Inicio' ? 'sogom · Juan Sebastián Osorio' : `${ti
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageAbs} />
 
-    <!-- Favicon (placeholder por ahora). -->
+    <!-- Favicon — gradiente sunset con la "s" de sogom. -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
     <!-- robots: permitimos indexar. Si en algún momento despliegas un
          entorno de staging, sobrescribe esto desde la página. -->
