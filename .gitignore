@@ -1,0 +1,42 @@
+# build output
+dist/
+
+# generated types (Astro)
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# coverage
+coverage/
+.nyc_output/
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.idea/
+*.swp
+*.swo
+
+# Playwright (lo usaremos después para E2E)
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
