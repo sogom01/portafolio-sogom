@@ -1,1 +1,63 @@
 @import 'tailwindcss';
+
+/* Activa dark: cuando hay clase `.dark` en <html> (o cualquier ancestro).
+   Tailwind v4 por defecto usa prefers-color-scheme; queremos toggle manual. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens — accesibles desde CSS y Tailwind via var(--color-*). */
+@theme {
+  --color-bg: #ffffff;
+  --color-fg: #0f172a;
+  --color-muted: #475569;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-border: #e2e8f0;
+
+  --color-bg-dark: #0b1220;
+  --color-fg-dark: #f1f5f9;
+  --color-muted-dark: #94a3b8;
+  --color-border-dark: #1f2937;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Reset/base mínima. */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light dark;
+}
+
+/* Foco visible para teclado (WCAG 2.4.7). Override del outline default,
+   pero asegurando contraste contra cualquier fondo. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respeta `prefers-reduced-motion` (WCAG 2.3.3). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utilitario .sr-only para enlaces "skip to content" y labels para
+   lectores de pantalla. Tailwind ya trae `sr-only`, lo dejamos por si
+   alguien lo importa fuera del entorno utility. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,106 @@
+---
+import '../../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Ruta a la imagen Open Graph relativa al sitio. Por defecto /og-default.png */
+  ogImage?: string;
+  /** Tipo de Open Graph: 'website' (default) o 'article' */
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title,
+  description = 'Portafolio de Juan Sebastián Osorio Gómez — desarrollador web y estudiante de seguridad de la información.',
+  ogImage = '/og-default.png',
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? 'https://portafolio.sogom.vercel.app';
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageAbs = new URL(ogImage, siteUrl).toString();
+const fullTitle = title === 'Inicio' ? 'Juan Sebastián Osorio · Portafolio' : `${title} · JSO`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Anti-FOUC: aplica la clase `dark` ANTES del primer paint.
+         Lee localStorage; si no hay preferencia, usa la del sistema.
+         Es la única <script> bloqueante del documento y es minúscula. -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const isDark = stored === 'dark' || (stored === null && prefersDark);
+          if (isDark) document.documentElement.classList.add('dark');
+        } catch {
+          /* localStorage puede fallar en modo privado; default = claro */
+        }
+      })();
+    </script>
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Seguridad: política de referrer endurecida.
+         Otros headers (CSP, X-Frame-Options, etc.) van en vercel.json. -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Theme color: coordina con el tema actual del navegador (mobile). -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+
+    <!-- Canonical para SEO. -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp). -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter card. -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <!-- Favicon (placeholder por ahora). -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- robots: permitimos indexar. Si en algún momento despliegas un
+         entorno de staging, sobrescribe esto desde la página. -->
+    <meta name="robots" content="index, follow" />
+  </head>
+
+  <body
+    class="flex min-h-screen flex-col bg-[var(--color-bg)] font-sans text-[var(--color-fg)] antialiased transition-colors duration-150 dark:bg-[var(--color-bg-dark)] dark:text-[var(--color-fg-dark)]"
+  >
+    <!-- WCAG 2.4.1: bypass de bloques. Solo visible al recibir foco con teclado. -->
+    <a
+      href="#main"
+      class="sr-only rounded-md bg-[var(--color-accent)] px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50"
+    >
+      Saltar al contenido
+    </a>
+
+    <Header />
+
+    <main id="main" class="mx-auto w-full max-w-6xl flex-1 px-4 py-12 sm:px-6 lg:px-8">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

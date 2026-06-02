@@ -1,17 +1,71 @@
 ---
+export const prerender = true;
 
+import BaseLayout from '../presentation/layouts/BaseLayout.astro';
+
+const skills = [
+  'Astro · React · TypeScript',
+  'Python · APIs · automatización',
+  'OWASP Top 10 · pentesting básico',
+  'Tailwind · accesibilidad WCAG',
+  'CI/CD · GitHub Actions · Vercel',
+] as const;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout title="Inicio">
+  <section aria-labelledby="hero-title" class="py-12 sm:py-20">
+    <p class="mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase">
+      Desarrollador web · Estudiante de seguridad informática
+    </p>
+
+    <h1
+      id="hero-title"
+      class="max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+    >
+      Hola, soy Juan Sebastián.
+      <span class="block text-[var(--color-accent)]">
+        Construyo web con foco en seguridad y rendimiento.
+      </span>
+    </h1>
+
+    <p
+      class="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+    >
+      Diseño y desarrollo sitios web rápidos, accesibles y seguros. Trabajo con Astro, TypeScript,
+      Python y Tailwind, y aplico estándares OWASP desde la primera línea de código.
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a
+        href="/services"
+        class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
+      >
+        Ver servicios
+      </a>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] px-5 py-2.5 text-sm font-medium text-[var(--color-fg)] transition-colors hover:bg-[var(--color-border)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)] dark:hover:bg-[var(--color-border-dark)]"
+      >
+        Contáctame
+      </a>
+    </div>
+  </section>
+
+  <section
+    aria-labelledby="skills-title"
+    class="border-t border-[var(--color-border)] py-12 dark:border-[var(--color-border-dark)]"
+  >
+    <h2 id="skills-title" class="text-2xl font-semibold tracking-tight">
+      Stack y áreas de trabajo
+    </h2>
+    <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skills.map((skill) => (
+          <li class="rounded-md border border-[var(--color-border)] px-4 py-3 text-sm text-[var(--color-muted)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-muted-dark)]">
+            {skill}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

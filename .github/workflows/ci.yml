@@ -43,6 +43,19 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
 
+  test:
+    name: Unit tests + coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run test:coverage
+
   build:
     name: Build
     runs-on: ubuntu-latest

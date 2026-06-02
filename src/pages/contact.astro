@@ -1,0 +1,205 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../presentation/layouts/BaseLayout.astro';
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Formulario de contacto seguro para hablar de tu proyecto."
+>
+  <section class="py-12">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Contacto</h1>
+    <p class="mt-4 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Cuéntame en qué estás trabajando. Respondo en menos de 48 horas.
+    </p>
+
+    <noscript>
+      <p
+        class="mt-6 max-w-2xl rounded-md border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"
+        role="alert"
+      >
+        Este formulario requiere JavaScript para la verificación anti-bot. Por favor, actívalo o
+        escríbeme directamente desde el botón de email en el pie de página.
+      </p>
+    </noscript>
+
+    <form
+      id="contact-form"
+      action="/api/contact"
+      method="POST"
+      novalidate
+      class="mt-8 grid max-w-2xl gap-5"
+      aria-describedby="form-help"
+    >
+      <p id="form-help" class="sr-only">
+        Todos los campos marcados como obligatorios deben rellenarse.
+      </p>
+
+      <div>
+        <label for="name" class="block text-sm font-medium">
+          Nombre <span aria-hidden="true" class="text-[var(--color-accent)]">*</span>
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+          minlength="2"
+          maxlength="80"
+          aria-required="true"
+          aria-describedby="name-error"
+          class="mt-1 block w-full rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm shadow-sm focus:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
+        />
+        <p id="name-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium">
+          Correo <span aria-hidden="true" class="text-[var(--color-accent)]">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="200"
+          aria-required="true"
+          aria-describedby="email-error"
+          class="mt-1 block w-full rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm shadow-sm focus:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
+        />
+        <p id="email-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium">
+          Mensaje <span aria-hidden="true" class="text-[var(--color-accent)]">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          required
+          minlength="10"
+          maxlength="2000"
+          aria-required="true"
+          aria-describedby="message-error message-hint"
+          class="mt-1 block w-full rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm shadow-sm focus:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
+        ></textarea>
+        <p
+          id="message-hint"
+          class="mt-1 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+        >
+          Entre 10 y 2000 caracteres.
+        </p>
+        <p id="message-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
+      </div>
+
+      <!--
+        Honeypot: invisible visualmente, no leído por screen readers,
+        no enfocable con Tab. Pero presente en el DOM para que bots tontos
+        que rellenan todos los campos lo rellenen y se delaten.
+      -->
+      <div
+        aria-hidden="true"
+        style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
+      >
+        <label for="website">No rellenar este campo</label>
+        <input id="website" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <!-- Widget Turnstile (Cloudflare). El script lo monta vía data-attrs. -->
+      <div
+        class="cf-turnstile"
+        data-sitekey={turnstileSiteKey}
+        data-theme="auto"
+        data-size="flexible"
+      >
+      </div>
+
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <button
+          id="submit-btn"
+          type="submit"
+          class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          Enviar mensaje
+        </button>
+
+        <p id="form-status" role="status" aria-live="polite" tabindex="-1" class="text-sm"></p>
+      </div>
+    </form>
+  </section>
+
+  <!-- Script oficial de Cloudflare (carga el widget).
+       is:inline porque es un script externo que no necesita procesado
+       por Vite (carga el SDK de Turnstile directamente). -->
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+  ></script>
+
+  <!-- Isla de comportamiento: intercepta submit, hace fetch, gestiona UX. -->
+  <script is:inline>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('form-status');
+      const submitBtn = document.getElementById('submit-btn');
+      if (!form || !status || !submitBtn) return;
+
+      const setStatus = (msg, kind) => {
+        status.textContent = msg;
+        status.className =
+          'text-sm ' +
+          (kind === 'success'
+            ? 'text-green-600 dark:text-green-400'
+            : kind === 'error'
+              ? 'text-red-600 dark:text-red-400'
+              : 'text-[var(--color-muted)]');
+        // Mover el foco al status para anuncio inmediato a lectores.
+        if (msg) status.focus();
+      };
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const turnstileToken = data.get('cf-turnstile-response') || '';
+
+        const payload = {
+          name: String(data.get('name') || '').trim(),
+          email: String(data.get('email') || '').trim(),
+          message: String(data.get('message') || '').trim(),
+          honeypot: String(data.get('honeypot') || ''),
+          turnstileToken: String(turnstileToken),
+        };
+
+        submitBtn.disabled = true;
+        setStatus('Enviando…', 'info');
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const json = await res.json().catch(() => ({}));
+
+          if (res.ok && json.ok) {
+            form.reset();
+            // Reset del widget Turnstile para permitir un nuevo envío.
+            if (window.turnstile) window.turnstile.reset();
+            setStatus('Mensaje enviado. Te responderé pronto. ¡Gracias!', 'success');
+          } else {
+            setStatus(json.error || 'No se pudo enviar el mensaje.', 'error');
+          }
+        } catch {
+          setStatus('Error de red. Inténtalo de nuevo.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</BaseLayout>
