@@ -10,9 +10,23 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
   title="Contacto"
   description="Formulario de contacto seguro para hablar de tu proyecto."
 >
-  <section class="py-12">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Contacto</h1>
-    <p class="mt-4 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+  <section class="relative isolate overflow-hidden py-12">
+    <div class="blob blob-purple top-[-40px] left-[40%] h-[240px] w-[240px]" aria-hidden="true">
+    </div>
+
+    <p
+      class="fade-in-up mb-2 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase"
+    >
+      Contacto
+    </p>
+    <h1
+      class="fade-in-up fade-in-up-delay-1 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+    >
+      Hablemos de <span class="gradient-text">tu proyecto.</span>
+    </h1>
+    <p
+      class="fade-in-up fade-in-up-delay-2 mt-4 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+    >
       Cuéntame en qué estás trabajando. Respondo en menos de 48 horas.
     </p>
 
@@ -125,7 +139,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         <button
           id="submit-btn"
           type="submit"
-          class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+          class="glow-on-hover inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           Enviar mensaje
         </button>

@@ -1,55 +1,60 @@
 @import 'tailwindcss';
 
-/* Activa dark: cuando hay clase `.dark` en <html> (o cualquier ancestro).
-   Tailwind v4 por defecto usa prefers-color-scheme; queremos toggle manual. */
+/* Activa dark: cuando hay clase `.dark` en <html> (o cualquier ancestro). */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Design tokens — accesibles desde CSS y Tailwind via var(--color-*). */
+/* Design tokens. */
 @theme {
   --color-bg: #ffffff;
   --color-fg: #0f172a;
   --color-muted: #475569;
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
+  --color-accent-2: #7c3aed; /* púrpura para gradientes */
   --color-border: #e2e8f0;
 
-  --color-bg-dark: #0b1220;
+  --color-bg-dark: #070b14;
   --color-fg-dark: #f1f5f9;
   --color-muted-dark: #94a3b8;
-  --color-border-dark: #1f2937;
+  --color-border-dark: #1e293b;
 
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+  /* Easing y duración consistentes. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Reset/base mínima. */
+/* Base. */
 html {
   scroll-behavior: smooth;
   color-scheme: light dark;
 }
 
-/* Foco visible para teclado (WCAG 2.4.7). Override del outline default,
-   pero asegurando contraste contra cualquier fondo. */
+body {
+  background-image: radial-gradient(
+    1200px circle at 0% 0%,
+    rgba(124, 58, 237, 0.05),
+    transparent 40%
+  );
+}
+
+.dark body {
+  background-image:
+    radial-gradient(1200px circle at 0% 0%, rgba(124, 58, 237, 0.12), transparent 45%),
+    radial-gradient(800px circle at 100% 100%, rgba(37, 99, 235, 0.08), transparent 50%);
+}
+
+/* Foco visible. */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-/* Respeta `prefers-reduced-motion` (WCAG 2.3.3). */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Utilitario .sr-only para enlaces "skip to content" y labels para
-   lectores de pantalla. Tailwind ya trae `sr-only`, lo dejamos por si
-   alguien lo importa fuera del entorno utility. */
+/* sr-only para skip links. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -60,4 +65,222 @@ html {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ============================================================
+   Utilidades visuales modernas
+   ============================================================ */
+
+/* Gradient text reutilizable. */
+.gradient-text {
+  background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Borde con gradiente animado. */
+.gradient-border {
+  position: relative;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2), transparent);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s var(--ease-out-quart);
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* Blobs de fondo animados — para hero. */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+.dark .blob {
+  opacity: 0.25;
+}
+.blob-blue {
+  background: var(--color-accent);
+  animation: blob-float-1 22s var(--ease-out-quart) infinite;
+}
+.blob-purple {
+  background: var(--color-accent-2);
+  animation: blob-float-2 28s var(--ease-out-quart) infinite;
+}
+
+@keyframes blob-float-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+@keyframes blob-float-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 30px) scale(1.15);
+  }
+}
+
+/* Reveal on scroll (controlado por reveal.ts). */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+
+/* Hover lift sutil para cards. */
+.lift {
+  transition:
+    transform 0.3s var(--ease-out-quart),
+    box-shadow 0.3s var(--ease-out-quart);
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.2);
+}
+.dark .lift:hover {
+  box-shadow: 0 12px 30px -10px rgba(124, 58, 237, 0.35);
+}
+
+/* Glow al pasar el ratón sobre botones de acento. */
+.glow-on-hover {
+  position: relative;
+  isolation: isolate;
+}
+.glow-on-hover::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  z-index: -1;
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.3s var(--ease-out-quart);
+}
+.glow-on-hover:hover::after {
+  opacity: 0.7;
+}
+
+/* Marquee infinito horizontal (para tech stack). */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+.marquee__track {
+  display: flex;
+  gap: 2.5rem;
+  flex-shrink: 0;
+  animation: marquee-scroll 35s linear infinite;
+  padding-right: 2.5rem;
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Aparición suave del hero. */
+.fade-in-up {
+  animation: fade-in-up 1s var(--ease-out-expo) both;
+}
+.fade-in-up-delay-1 {
+  animation-delay: 0.15s;
+}
+.fade-in-up-delay-2 {
+  animation-delay: 0.3s;
+}
+.fade-in-up-delay-3 {
+  animation-delay: 0.45s;
+}
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cursor blink para terminal. */
+.terminal-cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  background-color: currentColor;
+  vertical-align: text-bottom;
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Respeta reduce-motion: cancela TODO lo animado. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .blob {
+    display: none;
+  }
 }

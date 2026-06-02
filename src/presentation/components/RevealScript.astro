@@ -1,0 +1,34 @@
+---
+/**
+ * Componente sin DOM — solo inyecta el script de reveal-on-scroll global.
+ * Se importa una vez en BaseLayout. Usa IntersectionObserver: cero
+ * dependencias, ~700 bytes minified.
+ *
+ * Uso: añade la clase `.reveal` (o `.reveal reveal-delay-1`, etc.) a
+ * cualquier elemento. Se mostrará al entrar al viewport.
+ */
+---
+
+<script is:inline>
+  (function () {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      // Fallback: si no hay soporte, mostramos todo de inmediato.
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  })();
+</script>

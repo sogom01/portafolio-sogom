@@ -27,12 +27,20 @@ const values = [
   title="Sobre mí"
   description="Juan Sebastián Osorio — desarrollador web colombiano con foco en seguridad informática. Construyo sitios rápidos, accesibles y endurecidos contra OWASP Top 10."
 >
-  <section class="py-12 sm:py-16">
-    <p class="mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase">
+  <section class="relative isolate overflow-hidden py-12 sm:py-16">
+    <div class="blob blob-purple top-[-60px] right-[-40px] h-[260px] w-[260px]" aria-hidden="true">
+    </div>
+
+    <p
+      class="fade-in-up mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase"
+    >
       Sobre mí
     </p>
-    <h1 class="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-      Construyo web seria con la mentalidad de un estudiante de seguridad.
+    <h1
+      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+    >
+      Construyo web seria con la mentalidad de un
+      <span class="gradient-text">estudiante de seguridad.</span>
     </h1>
 
     <div
@@ -73,8 +81,10 @@ const values = [
 
     <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {
-        values.map((v) => (
-          <li class="rounded-lg border border-[var(--color-border)] p-5 dark:border-[var(--color-border-dark)]">
+        values.map((v, i) => (
+          <li
+            class={`reveal reveal-delay-${Math.min(i, 3)} lift rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
+          >
             <h3 class="font-semibold">{v.title}</h3>
             <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
               {v.body}

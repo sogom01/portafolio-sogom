@@ -39,7 +39,7 @@ const featured: Project = {
     'Lighthouse: Performance 95+, Accessibility 100, Best Practices 100, SEO 100',
   ],
   liveUrl: 'https://portafoliosogom.vercel.app',
-  repoUrl: 'https://github.com/sogom01/portafolio-jso',
+  repoUrl: 'https://github.com/sogom01/portafolio-sogom',
   status: 'live',
 };
 
@@ -90,12 +90,20 @@ const statusLabel = {
   title="Proyectos"
   description="Proyectos de desarrollo web y seguridad de Juan Sebastián Osorio. Casos de estudio reales con stack y resultados documentados."
 >
-  <section class="py-12 sm:py-16">
-    <p class="mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase">
+  <section class="relative isolate overflow-hidden py-12 sm:py-16">
+    <div class="blob blob-blue top-[-40px] right-[-60px] h-[260px] w-[260px]" aria-hidden="true">
+    </div>
+
+    <p
+      class="fade-in-up mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase"
+    >
       Proyectos
     </p>
-    <h1 class="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-      Trabajo real, decisiones documentadas.
+    <h1
+      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+    >
+      Trabajo real,
+      <span class="gradient-text">decisiones documentadas.</span>
     </h1>
     <p class="mt-6 max-w-2xl text-lg text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
       Estoy al inicio de mi etapa freelance. Esta sección crecerá rápido — mientras tanto, este
@@ -107,7 +115,7 @@ const statusLabel = {
     <h2 id="featured-title" class="sr-only">Proyecto destacado</h2>
 
     <article
-      class="rounded-xl border border-[var(--color-border)] p-6 sm:p-8 dark:border-[var(--color-border-dark)]"
+      class="reveal gradient-border lift rounded-xl bg-gradient-to-br from-[var(--color-accent)]/[0.03] to-[var(--color-accent-2)]/[0.03] p-6 shadow-sm sm:p-8 dark:from-[var(--color-accent)]/[0.06] dark:to-[var(--color-accent-2)]/[0.06]"
     >
       <div class="flex flex-wrap items-center gap-3">
         <span
@@ -212,8 +220,10 @@ const statusLabel = {
 
     <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
       {
-        upcoming.map((p) => (
-          <article class="flex flex-col rounded-xl border border-[var(--color-border)] p-6 dark:border-[var(--color-border-dark)]">
+        upcoming.map((p, i) => (
+          <article
+            class={`reveal reveal-delay-${Math.min(i, 3)} lift flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
+          >
             <span
               class={`inline-flex w-fit rounded-full px-3 py-0.5 text-xs font-semibold ${statusLabel[p.status].class}`}
             >
