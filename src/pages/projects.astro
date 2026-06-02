@@ -33,6 +33,8 @@ const featured: Project = {
   status: 'live',
 };
 
+type ConceptStatus = 'concept' | 'building';
+
 interface Concept {
   name: string;
   category: string;
@@ -41,9 +43,32 @@ interface Concept {
   palette: readonly string[]; // colores hex para mostrar paleta
   stack: readonly string[];
   imageGradient: string; // gradient css para la miniatura
+  status?: ConceptStatus; // por defecto 'concept' (landing diseñada). 'building' = app en desarrollo
 }
 
 const concepts: readonly Concept[] = [
+  {
+    name: 'MotoZone',
+    category: 'E-commerce · Repuestos de moto',
+    tagline: 'Todo lo que tu moto necesita, en un solo lugar.',
+    description:
+      'App completa de e-commerce para venta de repuestos y accesorios de moto. Catálogo con búsqueda, filtros por categoría y precio, sort múltiple, carrito persistente con drawer lateral, modal de detalle por producto, badges de stock bajo y ticker animado. Diseño dark con acento crimson, tipografía Playfair Display.',
+    palette: ['#030000', '#9f1239', '#e11d48', '#f43f5e'],
+    stack: ['React + Hooks', 'Carrito persistente', 'Búsqueda y filtros', 'UI dark editorial'],
+    imageGradient: 'linear-gradient(135deg, #030000 0%, #9f1239 60%, #e11d48 100%)',
+    status: 'building',
+  },
+  {
+    name: 'Pan y Ricuras',
+    category: 'Carta digital · Panadería',
+    tagline: 'Bienvenido — explora nuestra carta.',
+    description:
+      'Carta digital para panadería tradicional de Chipre (Manizales). Vista cliente con búsqueda, filtros por categoría y agrupación visual estilo menú impreso. Panel admin protegido con login que permite añadir, editar, marcar agotado y eliminar productos en vivo. Paleta cálida marrón + dorado, tipografía Cormorant Garamond.',
+    palette: ['#1a0f07', '#c99e4c', '#f5ead8', '#4a7c59'],
+    stack: ['React + Hooks', 'CRUD admin', 'Login protegido', 'UI editorial cálida'],
+    imageGradient: 'linear-gradient(135deg, #1a0f07 0%, #2e1c0a 50%, #c99e4c 100%)',
+    status: 'building',
+  },
   {
     name: 'Aurora',
     category: 'Café de origen · Restauración',
@@ -85,6 +110,16 @@ const concepts: readonly Concept[] = [
     imageGradient: 'linear-gradient(135deg, #F2F0EA 0%, #2A2BF5 60%, #14130F 100%)',
   },
 ];
+
+// Etiquetas dinámicas por status
+const statusLabels: Record<ConceptStatus, { text: string; bgClass: string }> = {
+  concept: { text: 'Concepto', bgClass: 'bg-white/90 text-[var(--color-fg)]' },
+  building: {
+    text: 'En desarrollo',
+    bgClass:
+      'bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] text-white',
+  },
+};
 ---
 
 <BaseLayout
@@ -219,14 +254,15 @@ const concepts: readonly Concept[] = [
         <p
           class="eyebrow-dot mb-4 inline-flex items-center text-xs font-medium tracking-wider uppercase"
         >
-          Conceptos de muestra
+          Conceptos y proyectos en curso
         </p>
         <h2 id="concepts-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Cuatro estilos, cuatro <span class="italic-accent">mundos</span>.
+          Seis mundos, una misma <span class="italic-accent">forma de trabajar</span>.
         </h2>
         <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          Diseños listos para implementar. Demuestran que adapto el lenguaje visual a tu industria —
-          un café no se vende como un gimnasio.
+          Apps en desarrollo y conceptos de landing listos para implementar. Demuestran que adapto
+          el lenguaje visual y el alcance técnico a cada industria — un café no se vende como un
+          gimnasio, y una panadería no se gestiona como una tienda de repuestos.
         </p>
       </div>
     </div>
@@ -253,8 +289,13 @@ const concepts: readonly Concept[] = [
                 ))}
               </div>
               <div class="absolute top-5 left-5">
-                <span class="inline-flex rounded-full bg-white/90 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-[var(--color-fg)] uppercase backdrop-blur-sm">
-                  Concepto
+                <span
+                  class:list={[
+                    'inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase shadow-sm backdrop-blur-sm',
+                    statusLabels[c.status ?? 'concept'].bgClass,
+                  ]}
+                >
+                  {statusLabels[c.status ?? 'concept'].text}
                 </span>
               </div>
             </div>
