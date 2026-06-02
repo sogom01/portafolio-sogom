@@ -16,7 +16,7 @@ interface Project {
 
 const featured: Project = {
   title: 'Este mismo portafolio',
-  subtitle: 'Mi propio sitio, hecho como ejemplo de mi forma de trabajar',
+  subtitle: 'Mi propio sitio, hecho como muestra de mi forma de trabajar',
   description:
     'La web donde estás ahora. Construida desde cero para mostrarte cómo hago las cosas: rápida, accesible, sin trucos, y lista para resistir el uso real.',
   stack: ['Astro', 'TypeScript', 'Tailwind', 'Vercel', 'Cloudflare', 'Resend'],
@@ -33,69 +33,81 @@ const featured: Project = {
   status: 'live',
 };
 
-const upcoming: readonly Project[] = [
-  {
-    title: 'Análisis de seguridad para una app vulnerable',
-    subtitle: 'Mostrando cómo trabajo cuando reviso la seguridad de un sitio',
-    description:
-      'Voy a tomar una aplicación creada a propósito con fallos de seguridad, la analizaré paso a paso, y publicaré el reporte. Para que veas cómo trabajo cuando hago auditorías reales.',
-    stack: ['Análisis manual', 'Herramientas profesionales', 'Reporte en PDF'],
-    highlights: [
-      'Identifico problemas reales como un atacante los vería',
-      'Cada hallazgo viene con su prueba y su solución',
-      'Reporte legible para no técnicos',
-      'Plantilla que reutilizaré con clientes reales',
-    ],
-    status: 'in-progress',
-  },
-  {
-    title: 'Web para un negocio real',
-    subtitle: 'Mi primer cliente, documentado de principio a fin',
-    description:
-      'Cuando llegue el primer cliente (puede que seas tú), voy a documentar el proceso completo: qué pidió, qué construí, cómo se ven los resultados.',
-    stack: ['Diseño desde cero', 'Métricas antes/después', 'Aprendizajes'],
-    highlights: [
-      'Diseño hecho a partir de la conversación con el cliente',
-      'Números reales: visitas, contactos, conversión',
-      'Lo bueno y lo difícil del proceso, todo contado',
-    ],
-    status: 'planned',
-  },
-] as const;
+interface Concept {
+  name: string;
+  category: string;
+  tagline: string;
+  description: string;
+  palette: readonly string[]; // colores hex para mostrar paleta
+  stack: readonly string[];
+  imageGradient: string; // gradient css para la miniatura
+}
 
-const statusLabel = {
-  live: { text: 'En línea', class: 'bg-green-600/15 text-green-700 dark:text-green-400' },
-  'in-progress': {
-    text: 'En desarrollo',
-    class: 'bg-amber-500/15 text-amber-700 dark:text-amber-400',
+const concepts: readonly Concept[] = [
+  {
+    name: 'Aurora',
+    category: 'Café de origen · Restauración',
+    tagline: 'Donde la montaña se vuelve tinto.',
+    description:
+      'Landing cálida y editorial para un café de especialidad en Manizales. Tipografía serif con cursivas, paleta crema y arcilla, atmósfera de finca cafetera.',
+    palette: ['#F3EAD9', '#B85C38', '#2A1E16', '#E7A879'],
+    stack: ['Diseño editorial', 'Fraunces serif', 'Animaciones suaves'],
+    imageGradient: 'linear-gradient(135deg, #F3EAD9 0%, #B85C38 50%, #2A1E16 100%)',
   },
-  planned: {
-    text: 'Próximamente',
-    class: 'bg-[var(--color-accent)]/15 text-[var(--color-accent)]',
+  {
+    name: 'FORJA',
+    category: 'Centro de entrenamiento · Fitness',
+    tagline: 'Tu mejor versión se forja aquí.',
+    description:
+      'Landing high-contrast para un gimnasio funcional. Tipografía display Anton, paleta dark con acento volt (verde-amarillo neón), energía industrial y planes de membresía.',
+    palette: ['#0B0C0E', '#CCFF00', '#191C21', '#F4F6F4'],
+    stack: ['Tipografía display', 'Dark theme', 'Pricing UI'],
+    imageGradient: 'linear-gradient(135deg, #0B0C0E 0%, #191C21 60%, #CCFF00 100%)',
   },
-};
+  {
+    name: 'Marfil',
+    category: 'Clínica dental · Salud',
+    tagline: 'Sonríe con total confianza.',
+    description:
+      'Landing fresca y de confianza para una clínica dental. Cards flotantes con badges de credibilidad, paleta teal+navy+menta, pensada para reducir la ansiedad del visitante y guiarlo a agendar.',
+    palette: ['#EEF5F7', '#15B5AE', '#0E3A47', '#D7EFEC'],
+    stack: ['UI accesible', 'Trust signals', 'WhatsApp booking'],
+    imageGradient: 'linear-gradient(135deg, #EEF5F7 0%, #15B5AE 70%, #0E3A47 100%)',
+  },
+  {
+    name: 'Pulso',
+    category: 'Estudio creativo · Marketing',
+    tagline: 'Marcas que la gente recuerda.',
+    description:
+      'Landing editorial-agencia con tipografía Bricolage Grotesque, marquee animado, lista de servicios estilo print y portfolio de casos. Para un estudio que necesita demostrar cultura visual desde el primer pixel.',
+    palette: ['#F2F0EA', '#2A2BF5', '#14130F', '#FBFAF6'],
+    stack: ['Editorial', 'Marquee animado', 'Hover-slide'],
+    imageGradient: 'linear-gradient(135deg, #F2F0EA 0%, #2A2BF5 60%, #14130F 100%)',
+  },
+];
 ---
 
 <BaseLayout
   title="Proyectos"
-  description="Casos reales de Juan Sebastián Osorio (sogom). Webs cuidadas, con resultados a la vista y proceso documentado."
+  description="Trabajos reales y conceptos de muestra de Juan Sebastián Osorio (sogom). Casos de estudio con proceso documentado."
 >
   <section class="py-12 sm:py-20">
     <p
-      class="fade-in-up mb-6 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase"
+      class="fade-in-up eyebrow-dot mb-6 inline-flex items-center text-xs font-medium tracking-wider uppercase"
     >
       Proyectos
     </p>
     <h1
-      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
     >
-      Trabajos reales, <span class="gradient-text">contados con claridad.</span>
+      Trabajos reales,
+      <span class="italic-accent">contados con claridad</span>.
     </h1>
     <p
       class="fade-in-up fade-in-up-delay-2 mt-6 max-w-2xl text-lg text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
     >
-      Estoy al inicio de mi etapa freelance. Esta sección crecerá rápido — mientras tanto, esta
-      misma web es un proyecto completo que puedes revisar de arriba a abajo.
+      Esta sección crecerá rápido. Te muestro lo que ya está en producción y los conceptos de diseño
+      que tengo listos para ser tu próximo proyecto.
     </p>
   </section>
 
@@ -108,9 +120,9 @@ const statusLabel = {
     >
       <div class="flex flex-wrap items-center gap-3">
         <span
-          class={`inline-flex rounded-full px-3 py-0.5 text-xs font-semibold ${statusLabel[featured.status].class}`}
+          class="inline-flex rounded-full bg-green-600/15 px-3 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400"
         >
-          {statusLabel[featured.status].text}
+          En línea
         </span>
         <span
           class="text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
@@ -197,45 +209,84 @@ const statusLabel = {
     </article>
   </section>
 
-  <!-- ROADMAP -->
+  <!-- CONCEPTOS DE DISEÑO -->
   <section
-    aria-labelledby="roadmap-title"
+    aria-labelledby="concepts-title"
     class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <div class="reveal max-w-2xl">
-      <p class="mb-4 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase">
-        Próximos casos
-      </p>
-      <h2 id="roadmap-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-        Lo que viene <span class="gradient-text">en los siguientes meses.</span>
-      </h2>
-      <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-        Prefiero anunciar lo que estoy construyendo a inventar trabajos que no he hecho.
-      </p>
+    <div class="reveal flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <p
+          class="eyebrow-dot mb-4 inline-flex items-center text-xs font-medium tracking-wider uppercase"
+        >
+          Conceptos de muestra
+        </p>
+        <h2 id="concepts-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Cuatro estilos, cuatro <span class="italic-accent">mundos</span>.
+        </h2>
+        <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Diseños listos para implementar. Demuestran que adapto el lenguaje visual a tu industria —
+          un café no se vende como un gimnasio.
+        </p>
+      </div>
     </div>
 
-    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+    <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
       {
-        upcoming.map((p, i) => (
+        concepts.map((c, i) => (
           <article
-            class={`reveal reveal-delay-${Math.min(i, 3)} lift flex flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-7 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
+            class={`reveal reveal-delay-${Math.min(i, 3)} lift group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
           >
-            <span
-              class={`inline-flex w-fit rounded-full px-3 py-0.5 text-xs font-semibold ${statusLabel[p.status].class}`}
+            {/* Miniatura del concepto: paleta visual */}
+            <div
+              class="relative h-48 overflow-hidden"
+              style={`background: ${c.imageGradient};`}
+              aria-hidden="true"
             >
-              {statusLabel[p.status].text}
-            </span>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight">{p.title}</h3>
-            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-              {p.subtitle}
-            </p>
-            <p class="mt-4 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-              {p.description}
-            </p>
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(255,255,255,0.18),transparent_55%)]" />
+              <div class="absolute right-5 bottom-5 flex gap-1.5">
+                {c.palette.map((color) => (
+                  <span
+                    class="h-5 w-5 rounded-full border border-white/40 shadow-sm"
+                    style={`background: ${color};`}
+                  />
+                ))}
+              </div>
+              <div class="absolute top-5 left-5">
+                <span class="inline-flex rounded-full bg-white/90 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-[var(--color-fg)] uppercase backdrop-blur-sm">
+                  Concepto
+                </span>
+              </div>
+            </div>
+
+            <div class="flex flex-1 flex-col p-7">
+              <p class="text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+                {c.category}
+              </p>
+              <h3 class="mt-2 text-2xl font-semibold tracking-tight">{c.name}</h3>
+              <p class="mt-1 font-serif text-sm text-[var(--color-accent)] italic">"{c.tagline}"</p>
+              <p class="mt-4 flex-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                {c.description}
+              </p>
+              <ul class="mt-5 flex flex-wrap gap-1.5">
+                {c.stack.map((s) => (
+                  <li class="rounded-md border border-[var(--color-border)] px-2 py-0.5 text-[11px] dark:border-[var(--color-border-dark)]">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </article>
         ))
       }
     </div>
+
+    <p
+      class="reveal mt-10 max-w-2xl text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+    >
+      Cualquiera de estos conceptos se puede adaptar a tu marca. Si te interesa alguno, hablemos y
+      lo convertimos en tu web.
+    </p>
   </section>
 
   <section
@@ -246,7 +297,7 @@ const statusLabel = {
     >
       <div>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">
-          ¿Quieres ser uno de los primeros?
+          ¿Quieres ser uno de los primeros casos reales?
         </h2>
         <p class="mt-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
           Precio especial de lanzamiento, atención completa y proceso documentado.

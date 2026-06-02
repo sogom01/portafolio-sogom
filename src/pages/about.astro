@@ -103,40 +103,78 @@ const principles = [
     class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
     <div class="reveal max-w-2xl">
-      <p class="mb-4 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase">
+      <p
+        class="eyebrow-dot mb-4 inline-flex items-center text-xs font-medium tracking-wider uppercase"
+      >
         Herramientas
       </p>
       <h2 id="tools-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-        Con qué <span class="gradient-text">construyo.</span>
+        Con qué <span class="italic-accent">construyo</span>.
       </h2>
       <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
         Para quien le interese el detalle técnico. Si no, puedes saltar directo a los servicios.
       </p>
     </div>
 
-    <div class="reveal reveal-delay-1 mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
+    <div class="reveal reveal-delay-1 mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
       <div>
-        <h3 class="text-sm font-semibold tracking-wider uppercase">Para la web</h3>
+        <h3 class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          Lenguajes
+        </h3>
         <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          <li>Astro · TypeScript</li>
-          <li>Tailwind CSS</li>
+          <li>JavaScript · TypeScript</li>
+          <li>Python · Java</li>
+          <li>C# · C++</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          Frontend & web
+        </h3>
+        <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          <li>React · Astro</li>
+          <li>Tailwind CSS · HTML5</li>
           <li>Accesibilidad WCAG</li>
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold tracking-wider uppercase">Para datos</h3>
+        <h3 class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          Bases de datos
+        </h3>
         <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          <li>Python · Node.js</li>
           <li>PostgreSQL</li>
-          <li>Validaciones rigurosas</li>
+          <li>SQL · consultas optimizadas</li>
+          <li>Modelado relacional</li>
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold tracking-wider uppercase">Para proteger</h3>
+        <h3 class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          Servidores & sistemas
+        </h3>
         <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          <li>Análisis OWASP</li>
-          <li>Cabeceras de seguridad</li>
-          <li>Protección anti-bot</li>
+          <li>Administración Linux</li>
+          <li>Administración Windows Server</li>
+          <li>Configuración y monitoreo</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          Seguridad
+        </h3>
+        <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          <li>OWASP Top 10</li>
+          <li>Cabeceras HTTP de seguridad</li>
+          <li>Anti-bot y rate limiting</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          DevOps
+        </h3>
+        <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          <li>Git · GitHub Actions</li>
+          <li>Vercel · Despliegues continuos</li>
+          <li>Testing automatizado</li>
         </ul>
       </div>
     </div>
