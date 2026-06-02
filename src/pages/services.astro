@@ -2,17 +2,280 @@
 export const prerender = true;
 
 import BaseLayout from '../presentation/layouts/BaseLayout.astro';
+
+interface Service {
+  name: string;
+  tagline: string;
+  copPrice: string;
+  usdPrice: string;
+  duration: string;
+  ideal: string;
+  includes: readonly string[];
+  highlighted?: boolean;
+}
+
+const services: readonly Service[] = [
+  {
+    name: 'Landing Profesional',
+    tagline: 'Una página potente, rápida y segura para presentar tu negocio o servicio.',
+    copPrice: '$1.200.000 COP',
+    usdPrice: '$290 USD',
+    duration: '1–2 semanas',
+    ideal: 'Para emprendedores, freelancers y pymes que necesitan presencia web inmediata.',
+    includes: [
+      'Diseño responsive y accesible (WCAG AA)',
+      'Astro + Tailwind, Lighthouse ≥ 95',
+      'Formulario de contacto con anti-bot',
+      'SEO técnico + meta tags Open Graph',
+      'Deploy gestionado en Vercel o Netlify',
+      'Dominio personalizado (lo aportas tú)',
+      '2 rondas de revisiones',
+    ],
+  },
+  {
+    name: 'Sitio Multipágina',
+    tagline: 'Hasta 6 páginas con identidad propia, ideal para portafolios, agencias o catálogos.',
+    copPrice: '$2.500.000 COP',
+    usdPrice: '$590 USD',
+    duration: '2–4 semanas',
+    ideal: 'Para profesionales, estudios pequeños y negocios con varias líneas de servicio.',
+    highlighted: true,
+    includes: [
+      'Todo lo del plan Landing',
+      'Hasta 6 páginas con diseño personalizado',
+      'Sección de blog o casos de estudio opcional',
+      'Modo claro/oscuro accesible',
+      'Tracking de eventos básicos (Plausible o GA4)',
+      'Cumplimiento básico OWASP Top 10',
+      '3 rondas de revisiones',
+    ],
+  },
+  {
+    name: 'Web + Auditoría de Seguridad',
+    tagline: 'Sitio completo entregado con un reporte de seguridad OWASP que puedes mostrar.',
+    copPrice: '$4.200.000 COP',
+    usdPrice: '$990 USD',
+    duration: '4–6 semanas',
+    ideal:
+      'Para negocios que manejan datos sensibles o quieren diferenciarse por seriedad técnica.',
+    includes: [
+      'Todo lo del plan Multipágina',
+      'Auditoría OWASP Top 10 documentada',
+      'Cabeceras HTTP endurecidas (HSTS, CSP, X-Frame, etc.)',
+      'Rate limiting y protección anti-bot avanzada',
+      'Logging estructurado GDPR-friendly',
+      'Reporte ejecutivo + técnico en PDF',
+      'Sesión de seguimiento 1 mes post-entrega',
+    ],
+  },
+] as const;
+
+const addons = [
+  {
+    name: 'Página adicional',
+    price: '$250.000 COP / $60 USD',
+  },
+  {
+    name: 'Integración con Stripe o PayPal',
+    price: '$600.000 COP / $145 USD',
+  },
+  {
+    name: 'Migración de contenido desde sitio existente',
+    price: 'Desde $400.000 COP / $95 USD',
+  },
+  {
+    name: 'Mantenimiento mensual (parches + monitoreo)',
+    price: '$250.000 COP / $60 USD por mes',
+  },
+] as const;
 ---
 
 <BaseLayout
   title="Servicios"
-  description="Servicios de desarrollo web seguro: landings, aplicaciones, auditoría de seguridad básica."
+  description="Desarrollo web profesional con foco en seguridad: landings, sitios multipágina y auditorías OWASP. Precios transparentes en COP y USD."
 >
-  <section class="py-12">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Servicios</h1>
-    <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-      Próximamente: catálogo de servicios de desarrollo web con foco en rendimiento, accesibilidad y
-      buenas prácticas OWASP.
+  <section class="py-12 sm:py-16">
+    <p class="mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase">
+      Servicios
     </p>
+    <h1 class="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+      Tres formas concretas de trabajar conmigo.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Cada paquete incluye desarrollo, despliegue y los principios de seguridad que aplico siempre.
+      Precios en pesos colombianos y dólares para que compares sin sorpresas.
+    </p>
+  </section>
+
+  <section aria-labelledby="plans-title" class="pb-8">
+    <h2 id="plans-title" class="sr-only">Paquetes</h2>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      {
+        services.map((s) => (
+          <article
+            class:list={[
+              'flex flex-col rounded-xl border p-6 shadow-sm',
+              s.highlighted
+                ? 'border-[var(--color-accent)] ring-1 ring-[var(--color-accent)]'
+                : 'border-[var(--color-border)] dark:border-[var(--color-border-dark)]',
+            ]}
+          >
+            {s.highlighted && (
+              <p class="mb-3 inline-block w-fit rounded-full bg-[var(--color-accent)] px-3 py-0.5 text-xs font-semibold text-white">
+                Más popular
+              </p>
+            )}
+            <h3 class="text-xl font-semibold tracking-tight">{s.name}</h3>
+            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {s.tagline}
+            </p>
+
+            <div class="mt-5">
+              <p class="text-2xl font-bold tracking-tight">{s.copPrice}</p>
+              <p class="text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                ≈ {s.usdPrice}
+              </p>
+            </div>
+
+            <p class="mt-4 text-xs tracking-wide text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+              Plazo: {s.duration}
+            </p>
+            <p class="mt-1 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {s.ideal}
+            </p>
+
+            <ul class="mt-5 flex-1 space-y-2 text-sm">
+              {s.includes.map((item) => (
+                <li class="flex gap-2">
+                  <svg
+                    class="h-5 w-5 shrink-0 text-[var(--color-accent)]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                  <span class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="/contact"
+              class:list={[
+                'mt-6 inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium transition-colors',
+                s.highlighted
+                  ? 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]'
+                  : 'border border-[var(--color-border)] text-[var(--color-fg)] hover:bg-[var(--color-border)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)] dark:hover:bg-[var(--color-border-dark)]',
+              ]}
+            >
+              Cotizar este plan
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section
+    aria-labelledby="addons-title"
+    class="mt-8 border-t border-[var(--color-border)] py-12 dark:border-[var(--color-border-dark)]"
+  >
+    <h2 id="addons-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
+      Complementos
+    </h2>
+    <p class="mt-3 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Si necesitas algo específico, se suma a cualquier paquete.
+    </p>
+
+    <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {
+        addons.map((a) => (
+          <li class="flex items-center justify-between rounded-lg border border-[var(--color-border)] px-4 py-3 text-sm dark:border-[var(--color-border-dark)]">
+            <span>{a.name}</span>
+            <span class="font-medium text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {a.price}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-6 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      ¿Necesitas algo que no está en la lista? Escríbeme y te paso un presupuesto a medida sin
+      compromiso.
+    </p>
+  </section>
+
+  <section
+    aria-labelledby="process-title"
+    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+  >
+    <h2 id="process-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
+      Cómo es trabajar conmigo
+    </h2>
+
+    <ol class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-4">
+      <li
+        class="rounded-lg border border-[var(--color-border)] p-5 dark:border-[var(--color-border-dark)]"
+      >
+        <span class="text-2xl font-bold text-[var(--color-accent)]">1</span>
+        <h3 class="mt-2 font-semibold">Llamada inicial</h3>
+        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          30 minutos. Sin coste. Definimos alcance y plazos reales.
+        </p>
+      </li>
+      <li
+        class="rounded-lg border border-[var(--color-border)] p-5 dark:border-[var(--color-border-dark)]"
+      >
+        <span class="text-2xl font-bold text-[var(--color-accent)]">2</span>
+        <h3 class="mt-2 font-semibold">Propuesta y anticipo</h3>
+        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Documento por escrito con entregables. 40% para empezar.
+        </p>
+      </li>
+      <li
+        class="rounded-lg border border-[var(--color-border)] p-5 dark:border-[var(--color-border-dark)]"
+      >
+        <span class="text-2xl font-bold text-[var(--color-accent)]">3</span>
+        <h3 class="mt-2 font-semibold">Desarrollo iterativo</h3>
+        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Previews semanales en URL real para que veas el avance.
+        </p>
+      </li>
+      <li
+        class="rounded-lg border border-[var(--color-border)] p-5 dark:border-[var(--color-border-dark)]"
+      >
+        <span class="text-2xl font-bold text-[var(--color-accent)]">4</span>
+        <h3 class="mt-2 font-semibold">Entrega + soporte</h3>
+        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          60% restante al deploy. 15 días de ajustes incluidos.
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <section
+    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+  >
+    <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="text-2xl font-semibold tracking-tight">¿Cuál encaja con tu proyecto?</h2>
+        <p class="mt-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Si dudas entre dos planes o quieres algo a medida, hablemos.
+        </p>
+      </div>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
+      >
+        Solicitar cotización
+      </a>
+    </div>
   </section>
 </BaseLayout>

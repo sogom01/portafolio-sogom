@@ -3,36 +3,79 @@ export const prerender = true;
 
 import BaseLayout from '../presentation/layouts/BaseLayout.astro';
 
-const skills = [
-  'Astro · React · TypeScript',
-  'Python · APIs · automatización',
-  'OWASP Top 10 · pentesting básico',
-  'Tailwind · accesibilidad WCAG',
-  'CI/CD · GitHub Actions · Vercel',
+const valueProps = [
+  {
+    title: 'Rápido por diseño',
+    body: 'Astro + render estático. Lighthouse Performance ≥ 95 sin esfuerzo.',
+    icon: '⚡',
+  },
+  {
+    title: 'Seguro por defecto',
+    body: 'OWASP Top 10 aplicado desde el primer commit. Headers, validación, anti-bot.',
+    icon: '🛡',
+  },
+  {
+    title: 'Accesible para todos',
+    body: 'WCAG AA cumplido. Navegable por teclado, lector de pantalla y modo oscuro.',
+    icon: '🦮',
+  },
+  {
+    title: 'Mantenible',
+    body: 'TypeScript estricto, tests automáticos y CI/CD verde antes de cada deploy.',
+    icon: '🧪',
+  },
 ] as const;
+
+interface ServicePreview {
+  name: string;
+  price: string;
+  duration: string;
+  highlighted?: boolean;
+}
+
+const servicesPreview: readonly ServicePreview[] = [
+  {
+    name: 'Landing Profesional',
+    price: '$1.200.000 COP / $290 USD',
+    duration: '1–2 semanas',
+  },
+  {
+    name: 'Sitio Multipágina',
+    price: '$2.500.000 COP / $590 USD',
+    duration: '2–4 semanas',
+    highlighted: true,
+  },
+  {
+    name: 'Web + Auditoría Seguridad',
+    price: '$4.200.000 COP / $990 USD',
+    duration: '4–6 semanas',
+  },
+];
 ---
 
 <BaseLayout title="Inicio">
+  <!-- HERO -->
   <section aria-labelledby="hero-title" class="py-12 sm:py-20">
     <p class="mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase">
-      Desarrollador web · Estudiante de seguridad informática
+      Desarrollo web + seguridad informática
     </p>
 
     <h1
       id="hero-title"
       class="max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl"
     >
-      Hola, soy Juan Sebastián.
-      <span class="block text-[var(--color-accent)]">
-        Construyo web con foco en seguridad y rendimiento.
-      </span>
+      Construyo web rápida, accesible y
+      <span class="text-[var(--color-accent)]">endurecida desde el primer commit.</span>
     </h1>
 
     <p
       class="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
     >
-      Diseño y desarrollo sitios web rápidos, accesibles y seguros. Trabajo con Astro, TypeScript,
-      Python y Tailwind, y aplico estándares OWASP desde la primera línea de código.
+      Soy <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+        >Juan Sebastián</strong
+      >, desarrollador web colombiano y estudiante de seguridad de la información. Diseño sitios
+      pensados para vender, mostrar o convertir, con estándares OWASP aplicados desde el código y
+      deploys verificables.
     </p>
 
     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -40,32 +83,105 @@ const skills = [
         href="/services"
         class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
       >
-        Ver servicios
+        Ver servicios y precios
       </a>
       <a
         href="/contact"
         class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] px-5 py-2.5 text-sm font-medium text-[var(--color-fg)] transition-colors hover:bg-[var(--color-border)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)] dark:hover:bg-[var(--color-border-dark)]"
       >
-        Contáctame
+        Hablemos de tu proyecto
       </a>
     </div>
   </section>
 
+  <!-- VALUE PROPS -->
   <section
-    aria-labelledby="skills-title"
-    class="border-t border-[var(--color-border)] py-12 dark:border-[var(--color-border-dark)]"
+    aria-labelledby="value-title"
+    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
   >
-    <h2 id="skills-title" class="text-2xl font-semibold tracking-tight">
-      Stack y áreas de trabajo
+    <h2 id="value-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
+      Lo que diferencia mi trabajo
     </h2>
-    <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <p class="mt-3 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Cuatro principios no negociables que aplico a cada proyecto.
+    </p>
+
+    <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
-        skills.map((skill) => (
-          <li class="rounded-md border border-[var(--color-border)] px-4 py-3 text-sm text-[var(--color-muted)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-muted-dark)]">
-            {skill}
+        valueProps.map((v) => (
+          <li class="rounded-lg border border-[var(--color-border)] p-5 dark:border-[var(--color-border-dark)]">
+            <span class="text-2xl" aria-hidden="true">
+              {v.icon}
+            </span>
+            <h3 class="mt-3 font-semibold">{v.title}</h3>
+            <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {v.body}
+            </p>
           </li>
         ))
       }
     </ul>
+  </section>
+
+  <!-- SERVICES TEASER -->
+  <section
+    aria-labelledby="services-preview-title"
+    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+  >
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h2 id="services-preview-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
+          Tres formas de trabajar conmigo
+        </h2>
+        <p class="mt-3 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Precios transparentes en pesos colombianos y dólares.
+        </p>
+      </div>
+      <a href="/services" class="text-sm font-medium text-[var(--color-accent)] hover:underline">
+        Ver todos los detalles →
+      </a>
+    </div>
+
+    <ul class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+      {
+        servicesPreview.map((s) => (
+          <li
+            class:list={[
+              'rounded-lg border p-5',
+              s.highlighted
+                ? 'border-[var(--color-accent)] ring-1 ring-[var(--color-accent)]'
+                : 'border-[var(--color-border)] dark:border-[var(--color-border-dark)]',
+            ]}
+          >
+            <h3 class="font-semibold">{s.name}</h3>
+            <p class="mt-2 text-lg font-bold tracking-tight">{s.price}</p>
+            <p class="mt-1 text-xs tracking-wide text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+              {s.duration}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section
+    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+  >
+    <div class="rounded-2xl bg-[var(--color-accent)] p-8 text-white sm:p-12">
+      <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+        ¿Listo para arrancar tu próximo sitio?
+      </h2>
+      <p class="mt-3 max-w-2xl text-white/90">
+        Cuéntame qué necesitas. Respondo en menos de 48 horas con una propuesta clara, sin
+        compromisos ni costes ocultos.
+      </p>
+      <a
+        href="/contact"
+        class="mt-6 inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-[var(--color-accent)] shadow-sm transition-opacity hover:opacity-90"
+      >
+        Iniciar conversación
+      </a>
+    </div>
   </section>
 </BaseLayout>
