@@ -69,15 +69,9 @@ body::after {
    Utilidades editoriales minimalistas
    ============================================================ */
 
-/* Gradient text — sunset rojo→naranja. */
-.gradient-text {
-  background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-/* Acento en cursiva con serif — para palabras destacadas en titulares. */
+/* Acento tipográfico único — cursiva serif con gradiente sunset.
+   ESTE es el ÚNICO estilo de énfasis del sitio. Usado en titulares,
+   precios destacados y palabras clave. Mantiene la identidad visual. */
 .italic-accent {
   font-family: var(--font-serif);
   font-style: italic;

@@ -28,6 +28,7 @@ interface ServicePreview {
   price: string;
   duration: string;
   description: string;
+  features: readonly string[];
   highlighted?: boolean;
 }
 
@@ -37,14 +38,20 @@ const servicesPreview: readonly ServicePreview[] = [
     name: 'Una página',
     price: '$1.200.000 COP',
     duration: '1–2 semanas',
-    description: 'Ideal para presentar tu servicio o producto único.',
+    description: 'Lo esencial para que tu negocio exista en internet.',
+    features: [
+      'Diseño cuidado para móvil y computador',
+      'Formulario con protección anti-spam',
+      'Optimizada para Google',
+    ],
   },
   {
     no: '02',
     name: 'Sitio completo',
     price: '$2.500.000 COP',
     duration: '2–4 semanas',
-    description: 'Hasta seis páginas. Para negocios con varias áreas.',
+    description: 'Hasta seis páginas con identidad propia.',
+    features: ['Diseño hecho a la medida', 'Blog o casos de éxito', 'Modo claro y modo oscuro'],
     highlighted: true,
   },
   {
@@ -52,7 +59,12 @@ const servicesPreview: readonly ServicePreview[] = [
     name: 'Sitio + seguridad reforzada',
     price: '$4.200.000 COP',
     duration: '4–6 semanas',
-    description: 'Cuando manejas información sensible o quieres ir un paso por delante.',
+    description: 'Cuando manejas datos sensibles o vas en serio.',
+    features: [
+      'Auditoría de seguridad documentada',
+      'Reporte ejecutivo y técnico',
+      'Acompañamiento post-entrega',
+    ],
   },
 ];
 
@@ -219,35 +231,57 @@ const stats = [
       </a>
     </div>
 
-    <ul class="mt-14 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+    <ul class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
       {
         servicesPreview.map((s, i) => (
           <li
-            class={`reveal reveal-delay-${Math.min(i, 3)} row-slide grid grid-cols-[auto_1fr_auto] items-center gap-4 py-6 sm:grid-cols-[60px_2fr_2fr_auto] sm:gap-8 sm:py-8`}
+            class:list={[
+              `reveal reveal-delay-${Math.min(i, 3)} lift flex flex-col rounded-2xl border bg-[var(--color-bg)] p-8 dark:bg-[var(--color-bg-dark)]`,
+              s.highlighted
+                ? 'border-[var(--color-accent)] shadow-[var(--color-accent)]/5 shadow-lg'
+                : 'border-[var(--color-border)] dark:border-[var(--color-border-dark)]',
+            ]}
           >
-            <span class="big-number text-2xl sm:text-3xl">{s.no}</span>
-            <div>
-              <h3
-                class:list={[
-                  'text-xl font-semibold tracking-tight sm:text-2xl',
-                  s.highlighted && 'italic-accent',
-                ]}
-              >
-                {s.name}
-              </h3>
+            <div class="flex items-center justify-between">
+              <span class="big-number text-4xl leading-none">{s.no}</span>
               {s.highlighted && (
-                <span class="mt-1 inline-block text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+                <span class="rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-3 py-0.5 text-[10px] font-semibold tracking-wider text-white uppercase">
                   Más solicitado
                 </span>
               )}
             </div>
-            <p class="hidden text-sm text-[var(--color-muted)] sm:block dark:text-[var(--color-muted-dark)]">
+
+            <h3 class="mt-6 text-xl font-semibold tracking-tight sm:text-2xl">{s.name}</h3>
+            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
               {s.description}
-              <span class="mt-1 block text-xs tracking-wider uppercase">{s.duration}</span>
             </p>
-            <p class="text-right">
-              <span class="block text-base font-semibold sm:text-lg">{s.price}</span>
-            </p>
+
+            <div class="mt-6 border-t border-[var(--color-border)] pt-6 dark:border-[var(--color-border-dark)]">
+              <p class="italic-accent text-3xl leading-none">{s.price}</p>
+              <p class="mt-2 text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+                Entrega en {s.duration}
+              </p>
+            </div>
+
+            <ul class="mt-6 flex-1 space-y-2.5 text-sm">
+              {s.features.map((f) => (
+                <li class="flex gap-2.5">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                  <span class="text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                    {f}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </li>
         ))
       }

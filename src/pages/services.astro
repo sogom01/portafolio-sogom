@@ -110,7 +110,7 @@ const process = [
     <h1
       class="fade-in-up fade-in-up-delay-1 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
     >
-      Tres formas claras de <span class="gradient-text">trabajar juntos.</span>
+      Tres formas claras de <span class="italic-accent">trabajar juntos</span>.
     </h1>
     <p
       class="fade-in-up fade-in-up-delay-2 mt-6 max-w-2xl text-lg text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
@@ -203,7 +203,7 @@ const process = [
         Extras
       </p>
       <h2 id="addons-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-        ¿Necesitas algo <span class="gradient-text">específico?</span>
+        ¿Necesitas algo <span class="italic-accent">específico</span>?
       </h2>
       <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
         Se suma a cualquier plan. Si no está en la lista, escríbeme y lo cotizamos.
@@ -236,7 +236,7 @@ const process = [
         Proceso
       </p>
       <h2 id="process-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-        Así trabajamos <span class="gradient-text">juntos.</span>
+        Así trabajamos <span class="italic-accent">juntos</span>.
       </h2>
     </div>
 
@@ -244,7 +244,7 @@ const process = [
       {
         process.map((step, i) => (
           <li class={`reveal reveal-delay-${Math.min(i, 3)}`}>
-            <span class="gradient-text text-4xl font-semibold tracking-tight">{step.n}</span>
+            <span class="big-number text-5xl">{step.n}</span>
             <h3 class="mt-4 font-semibold">{step.title}</h3>
             <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
               {step.body}
