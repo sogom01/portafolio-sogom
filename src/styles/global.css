@@ -1,50 +1,33 @@
 @import 'tailwindcss';
 
-/* Activa dark: cuando hay clase `.dark` en <html> (o cualquier ancestro). */
+/* Activa dark: cuando hay clase `.dark` en <html>. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Design tokens. */
+/* Design tokens — paleta sunset, minimalista. */
 @theme {
   --color-bg: #ffffff;
-  --color-fg: #0f172a;
-  --color-muted: #475569;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-2: #7c3aed; /* púrpura para gradientes */
-  --color-border: #e2e8f0;
+  --color-fg: #0a0a0a;
+  --color-muted: #525252;
+  --color-accent: #dc2626; /* rojo carmesí */
+  --color-accent-hover: #b91c1c;
+  --color-accent-2: #f97316; /* naranja cálido — gradientes */
+  --color-border: #e5e5e5;
 
-  --color-bg-dark: #070b14;
-  --color-fg-dark: #f1f5f9;
-  --color-muted-dark: #94a3b8;
-  --color-border-dark: #1e293b;
+  --color-bg-dark: #0a0a0a;
+  --color-fg-dark: #fafafa;
+  --color-muted-dark: #a3a3a3;
+  --color-border-dark: #262626;
 
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono:
-    ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace;
 
-  /* Easing y duración consistentes. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Base. */
+/* Base — fondo PLANO, sin gradientes que creen halos. */
 html {
   scroll-behavior: smooth;
   color-scheme: light dark;
-}
-
-body {
-  background-image: radial-gradient(
-    1200px circle at 0% 0%,
-    rgba(124, 58, 237, 0.05),
-    transparent 40%
-  );
-}
-
-.dark body {
-  background-image:
-    radial-gradient(1200px circle at 0% 0%, rgba(124, 58, 237, 0.12), transparent 45%),
-    radial-gradient(800px circle at 100% 100%, rgba(37, 99, 235, 0.08), transparent 50%);
 }
 
 /* Foco visible. */
@@ -54,7 +37,7 @@ body {
   border-radius: 2px;
 }
 
-/* sr-only para skip links. */
+/* sr-only. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -68,10 +51,10 @@ body {
 }
 
 /* ============================================================
-   Utilidades visuales modernas
+   Utilidades minimalistas
    ============================================================ */
 
-/* Gradient text reutilizable. */
+/* Gradient text — sunset rojo→naranja. */
 .gradient-text {
   background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
   background-clip: text;
@@ -79,7 +62,7 @@ body {
   color: transparent;
 }
 
-/* Borde con gradiente animado. */
+/* Borde sutil con gradiente al hover. */
 .gradient-border {
   position: relative;
   background-clip: padding-box;
@@ -98,93 +81,47 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.5;
-  transition: opacity 0.3s var(--ease-out-quart);
+  opacity: 0.4;
+  transition: opacity 0.4s var(--ease-out-quart);
 }
 .gradient-border:hover::before {
   opacity: 1;
 }
 
-/* Blobs de fondo animados — para hero. */
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
-}
-.dark .blob {
-  opacity: 0.25;
-}
-.blob-blue {
-  background: var(--color-accent);
-  animation: blob-float-1 22s var(--ease-out-quart) infinite;
-}
-.blob-purple {
-  background: var(--color-accent-2);
-  animation: blob-float-2 28s var(--ease-out-quart) infinite;
-}
-
-@keyframes blob-float-1 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -20px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.95);
-  }
-}
-@keyframes blob-float-2 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-40px, 30px) scale(1.15);
-  }
-}
-
-/* Reveal on scroll (controlado por reveal.ts). */
+/* Reveal on scroll. */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(16px);
   transition:
-    opacity 0.8s var(--ease-out-expo),
-    transform 0.8s var(--ease-out-expo);
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 .reveal-delay-1 {
-  transition-delay: 0.1s;
+  transition-delay: 0.08s;
 }
 .reveal-delay-2 {
-  transition-delay: 0.2s;
+  transition-delay: 0.16s;
 }
 .reveal-delay-3 {
-  transition-delay: 0.3s;
+  transition-delay: 0.24s;
 }
 
-/* Hover lift sutil para cards. */
+/* Hover lift suave. */
 .lift {
   transition:
-    transform 0.3s var(--ease-out-quart),
-    box-shadow 0.3s var(--ease-out-quart);
+    transform 0.4s var(--ease-out-quart),
+    border-color 0.3s var(--ease-out-quart);
 }
 .lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.2);
-}
-.dark .lift:hover {
-  box-shadow: 0 12px 30px -10px rgba(124, 58, 237, 0.35);
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
 }
 
-/* Glow al pasar el ratón sobre botones de acento. */
+/* Glow sutil al hover. */
 .glow-on-hover {
   position: relative;
   isolation: isolate;
@@ -197,48 +134,25 @@ body {
   background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
   z-index: -1;
   opacity: 0;
-  filter: blur(12px);
-  transition: opacity 0.3s var(--ease-out-quart);
+  filter: blur(14px);
+  transition: opacity 0.4s var(--ease-out-quart);
 }
 .glow-on-hover:hover::after {
-  opacity: 0.7;
+  opacity: 0.55;
 }
 
-/* Marquee infinito horizontal (para tech stack). */
-.marquee {
-  display: flex;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
-}
-.marquee__track {
-  display: flex;
-  gap: 2.5rem;
-  flex-shrink: 0;
-  animation: marquee-scroll 35s linear infinite;
-  padding-right: 2.5rem;
-}
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-/* Aparición suave del hero. */
+/* Aparición del hero. */
 .fade-in-up {
   animation: fade-in-up 1s var(--ease-out-expo) both;
 }
 .fade-in-up-delay-1 {
-  animation-delay: 0.15s;
+  animation-delay: 0.1s;
 }
 .fade-in-up-delay-2 {
-  animation-delay: 0.3s;
+  animation-delay: 0.2s;
 }
 .fade-in-up-delay-3 {
-  animation-delay: 0.45s;
+  animation-delay: 0.3s;
 }
 @keyframes fade-in-up {
   from {
@@ -251,22 +165,7 @@ body {
   }
 }
 
-/* Cursor blink para terminal. */
-.terminal-cursor {
-  display: inline-block;
-  width: 0.6em;
-  height: 1em;
-  background-color: currentColor;
-  vertical-align: text-bottom;
-  animation: blink 1s steps(2, start) infinite;
-}
-@keyframes blink {
-  to {
-    visibility: hidden;
-  }
-}
-
-/* Respeta reduce-motion: cancela TODO lo animado. */
+/* Respeta reduce-motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -279,8 +178,5 @@ body {
   .reveal {
     opacity: 1;
     transform: none;
-  }
-  .blob {
-    display: none;
   }
 }

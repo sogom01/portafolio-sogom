@@ -23,7 +23,7 @@ const {
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? 'https://portafoliosogom.vercel.app';
 const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageAbs = new URL(ogImage, siteUrl).toString();
-const fullTitle = title === 'Inicio' ? 'Juan Sebastián Osorio · Portafolio' : `${title} · JSO`;
+const fullTitle = title === 'Inicio' ? 'sogom · Juan Sebastián Osorio' : `${title} · sogom`;
 ---
 
 <!doctype html>

@@ -3,92 +3,95 @@ export const prerender = true;
 
 import BaseLayout from '../presentation/layouts/BaseLayout.astro';
 
-const values = [
+const principles = [
   {
-    title: 'Seguridad desde la primera línea',
-    body: 'Cada página o endpoint que escribo pasa por una checklist OWASP. La seguridad no se "añade al final", se diseña con el código.',
+    title: 'Seguridad desde el primer día',
+    body: 'Cuido los datos de tus visitantes con el mismo rigor que aplican los bancos. Sin atajos, sin "ya lo arreglaremos después".',
   },
   {
-    title: 'Rendimiento y accesibilidad como base',
-    body: 'Objetivo Lighthouse ≥ 95 en Performance y 100 en Accesibilidad. Sin esto, el resto no importa.',
+    title: 'Rápida o no se entrega',
+    body: 'Una web lenta es una web perdida. La mía carga antes de que el visitante alcance a aburrirse.',
   },
   {
-    title: 'Decisiones documentadas',
-    body: 'Cada decisión técnica importante queda explicada en el repo. Si te entregas algo, sabes por qué está hecho así.',
+    title: 'Todo queda explicado',
+    body: 'Te entrego documentación sencilla: qué hace cada parte, cómo cambiarla, cómo mantenerla. Sin dependencias eternas.',
   },
   {
-    title: 'Honestidad sobre el alcance',
-    body: 'Prefiero decir "esto está fuera de mis capacidades actuales" antes que cobrar y entregar algo mediocre. Si no es mi terreno, te paso a alguien mejor.',
+    title: 'Honestidad por delante',
+    body: 'Si lo que me pides está fuera de mis capacidades hoy, te lo digo. Prefiero rechazar un proyecto que entregar algo mediocre.',
   },
 ] as const;
 ---
 
 <BaseLayout
   title="Sobre mí"
-  description="Juan Sebastián Osorio — desarrollador web colombiano con foco en seguridad informática. Construyo sitios rápidos, accesibles y endurecidos contra OWASP Top 10."
+  description="Juan Sebastián Osorio (sogom) — desarrollador web colombiano. Construyo sitios cuidados, rápidos y seguros para personas y negocios reales."
 >
-  <section class="relative isolate overflow-hidden py-12 sm:py-16">
-    <div class="blob blob-purple top-[-60px] right-[-40px] h-[260px] w-[260px]" aria-hidden="true">
-    </div>
-
+  <section class="py-12 sm:py-20">
     <p
-      class="fade-in-up mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase"
+      class="fade-in-up mb-6 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase"
     >
       Sobre mí
     </p>
     <h1
-      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
     >
-      Construyo web seria con la mentalidad de un
-      <span class="gradient-text">estudiante de seguridad.</span>
+      Trabajo con la <span class="gradient-text">cabeza fría</span> y la atención al detalle de quien
+      estudia seguridad.
     </h1>
 
     <div
-      class="mt-8 max-w-3xl space-y-5 text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+      class="fade-in-up fade-in-up-delay-2 mt-10 max-w-2xl space-y-6 text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
     >
       <p>
-        Soy <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
-          >Juan Sebastián Osorio Gómez</strong
-        >, desarrollador web colombiano y estudiante de seguridad de la información. Mi día a día se
-        reparte entre escribir código que funciona y leer reportes de vulnerabilidades para entender
-        cómo otros lo rompen.
+        Me llamo <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+          >Juan Sebastián Osorio</strong
+        >, colombiano, y mi día se reparte entre escribir páginas web y estudiar cómo se rompen las
+        que no están bien hechas. Esa mezcla rara es justo lo que define mi forma de trabajar.
       </p>
       <p>
-        Trabajo principalmente con <strong>Astro, TypeScript estricto, Tailwind y Python</strong>, y
-        aplico los principios del OWASP Top 10 desde el primer commit: validación con Zod,
-        sanitización, headers de seguridad, rate limiting, logging sin filtrar PII. Lo que aparece
-        en el currículum, también aparece en mi código.
+        Cuando hago una web para alguien, no estoy solo "diseñando bonito". Pienso en cada
+        formulario como una puerta que puede abrir un atacante. Pienso en cada imagen como un
+        kilobyte extra que ralentiza la página. Pienso en cada visitante como una persona real con
+        prisa y un móvil viejo.
       </p>
       <p>
-        Estoy al principio de mi camino freelance. Eso significa dos cosas: precios razonables y una <strong
-          >obsesión personal con cada entrega</strong
-        >, porque cada cliente es una oportunidad de construir reputación. No vendo humo: prefiero
-        trabajos pequeños bien hechos a proyectos enormes que no pueda sostener.
+        Estoy en el inicio de mi camino freelance. Eso significa precios accesibles y, sobre todo,
+        una atención al detalle que no encuentras en agencias grandes con quince clientes a la vez.
+        Aquí tú no eres un número.
       </p>
     </div>
   </section>
 
   <section
-    aria-labelledby="values-title"
-    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+    aria-labelledby="principles-title"
+    class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <h2 id="values-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
-      Cómo trabajo
-    </h2>
-    <p class="mt-3 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-      Cuatro principios que aplico a cualquier proyecto, sin importar el tamaño.
-    </p>
+    <div class="reveal max-w-2xl">
+      <p class="mb-4 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase">
+        Cómo trabajo
+      </p>
+      <h2 id="principles-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        Cuatro reglas que <span class="gradient-text">no negocio.</span>
+      </h2>
+    </div>
 
-    <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <ul class="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2">
       {
-        values.map((v, i) => (
-          <li
-            class={`reveal reveal-delay-${Math.min(i, 3)} lift rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
-          >
-            <h3 class="font-semibold">{v.title}</h3>
-            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-              {v.body}
-            </p>
+        principles.map((p, i) => (
+          <li class={`reveal reveal-delay-${Math.min(i, 3)} flex gap-5`}>
+            <span
+              class="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-2)] text-sm font-semibold text-white"
+              aria-hidden="true"
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 class="text-lg font-semibold">{p.title}</h3>
+              <p class="mt-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                {p.body}
+              </p>
+            </div>
           </li>
         ))
       }
@@ -96,62 +99,68 @@ const values = [
   </section>
 
   <section
-    aria-labelledby="stack-title"
-    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+    aria-labelledby="tools-title"
+    class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <h2 id="stack-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
-      Stack y herramientas
-    </h2>
+    <div class="reveal max-w-2xl">
+      <p class="mb-4 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase">
+        Herramientas
+      </p>
+      <h2 id="tools-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        Con qué <span class="gradient-text">construyo.</span>
+      </h2>
+      <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+        Para quien le interese el detalle técnico. Si no, puedes saltar directo a los servicios.
+      </p>
+    </div>
 
-    <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
+    <div class="reveal reveal-delay-1 mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
       <div>
-        <h3 class="text-sm font-semibold tracking-wide uppercase">Frontend</h3>
-        <ul
-          class="mt-3 space-y-1.5 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
-        >
-          <li>Astro · TypeScript estricto</li>
-          <li>Tailwind CSS · accesibilidad WCAG</li>
-          <li>Vite · ESLint · Prettier</li>
+        <h3 class="text-sm font-semibold tracking-wider uppercase">Para la web</h3>
+        <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          <li>Astro · TypeScript</li>
+          <li>Tailwind CSS</li>
+          <li>Accesibilidad WCAG</li>
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold tracking-wide uppercase">Backend & datos</h3>
-        <ul
-          class="mt-3 space-y-1.5 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
-        >
-          <li>Node.js · funciones serverless</li>
-          <li>Python · FastAPI · scripts de automatización</li>
-          <li>PostgreSQL · validación con Zod</li>
+        <h3 class="text-sm font-semibold tracking-wider uppercase">Para datos</h3>
+        <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          <li>Python · Node.js</li>
+          <li>PostgreSQL</li>
+          <li>Validaciones rigurosas</li>
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold tracking-wide uppercase">Seguridad & ops</h3>
-        <ul
-          class="mt-3 space-y-1.5 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
-        >
-          <li>OWASP Top 10 · Burp Suite básico</li>
-          <li>Headers HTTP · CSP · CORS</li>
-          <li>CI/CD GitHub Actions · Vercel</li>
+        <h3 class="text-sm font-semibold tracking-wider uppercase">Para proteger</h3>
+        <ul class="mt-4 space-y-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          <li>Análisis OWASP</li>
+          <li>Cabeceras de seguridad</li>
+          <li>Protección anti-bot</li>
         </ul>
       </div>
     </div>
   </section>
 
   <section
-    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+    class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div
+      class="reveal flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between"
+    >
       <div>
-        <h2 class="text-2xl font-semibold tracking-tight">¿Tienes un proyecto en mente?</h2>
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">
+          ¿Tienes una idea en mente?
+        </h2>
         <p class="mt-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          Cuéntame qué necesitas y te respondo en menos de 48 horas.
+          Te respondo en menos de 24 horas.
         </p>
       </div>
       <a
         href="/contact"
-        class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
+        class="glow-on-hover inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
       >
-        Contáctame
+        Hablemos
       </a>
     </div>
   </section>

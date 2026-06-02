@@ -16,146 +16,151 @@ interface Service {
 
 const services: readonly Service[] = [
   {
-    name: 'Landing Profesional',
-    tagline: 'Una página potente, rápida y segura para presentar tu negocio o servicio.',
+    name: 'Una página',
+    tagline: 'Lo esencial para que tu negocio exista en internet hoy.',
     copPrice: '$1.200.000 COP',
     usdPrice: '$290 USD',
     duration: '1–2 semanas',
-    ideal: 'Para emprendedores, freelancers y pymes que necesitan presencia web inmediata.',
+    ideal: 'Para emprendedores, freelancers y pequeños negocios que necesitan presencia web ya.',
     includes: [
-      'Diseño responsive y accesible (WCAG AA)',
-      'Astro + Tailwind, Lighthouse ≥ 95',
-      'Formulario de contacto con anti-bot',
-      'SEO técnico + meta tags Open Graph',
-      'Deploy gestionado en Vercel o Netlify',
-      'Dominio personalizado (lo aportas tú)',
-      '2 rondas de revisiones',
+      'Diseño cuidado, listo para móvil y computador',
+      'Carga ultrarrápida, garantizada',
+      'Formulario de contacto con protección anti-spam',
+      'Pensada para que Google la encuentre',
+      'Publicación gestionada (tú solo aportas el dominio)',
+      'Dos rondas de cambios incluidas',
     ],
   },
   {
-    name: 'Sitio Multipágina',
-    tagline: 'Hasta 6 páginas con identidad propia, ideal para portafolios, agencias o catálogos.',
+    name: 'Sitio completo',
+    tagline: 'Hasta seis páginas con identidad propia. Para crecer.',
     copPrice: '$2.500.000 COP',
     usdPrice: '$590 USD',
     duration: '2–4 semanas',
-    ideal: 'Para profesionales, estudios pequeños y negocios con varias líneas de servicio.',
+    ideal: 'Para profesionales, estudios y negocios con varias áreas o servicios.',
     highlighted: true,
     includes: [
-      'Todo lo del plan Landing',
-      'Hasta 6 páginas con diseño personalizado',
-      'Sección de blog o casos de estudio opcional',
-      'Modo claro/oscuro accesible',
-      'Tracking de eventos básicos (Plausible o GA4)',
-      'Cumplimiento básico OWASP Top 10',
-      '3 rondas de revisiones',
+      'Todo lo del plan "Una página"',
+      'Hasta seis páginas con diseño hecho a la medida',
+      'Sección de blog o casos de éxito (opcional)',
+      'Modo claro y modo oscuro automáticos',
+      'Estadísticas de visitas (sin invadir la privacidad)',
+      'Tres rondas de cambios incluidas',
     ],
   },
   {
-    name: 'Web + Auditoría de Seguridad',
-    tagline: 'Sitio completo entregado con un reporte de seguridad OWASP que puedes mostrar.',
+    name: 'Sitio + seguridad reforzada',
+    tagline: 'Cuando manejas datos sensibles o juegas en serio.',
     copPrice: '$4.200.000 COP',
     usdPrice: '$990 USD',
     duration: '4–6 semanas',
-    ideal:
-      'Para negocios que manejan datos sensibles o quieren diferenciarse por seriedad técnica.',
+    ideal: 'Para negocios con información confidencial o que quieren un sello técnico de seriedad.',
     includes: [
-      'Todo lo del plan Multipágina',
-      'Auditoría OWASP Top 10 documentada',
-      'Cabeceras HTTP endurecidas (HSTS, CSP, X-Frame, etc.)',
-      'Rate limiting y protección anti-bot avanzada',
-      'Logging estructurado GDPR-friendly',
-      'Reporte ejecutivo + técnico en PDF',
-      'Sesión de seguimiento 1 mes post-entrega',
+      'Todo lo del plan "Sitio completo"',
+      'Revisión de seguridad punto por punto',
+      'Reporte ejecutivo y técnico para tus inversionistas o clientes',
+      'Protección reforzada contra spam, bots y ataques comunes',
+      'Registro de actividad respetando la privacidad de los usuarios',
+      'Acompañamiento durante el primer mes tras el lanzamiento',
     ],
   },
 ] as const;
 
 const addons = [
+  { name: 'Una página extra al plan', price: '$250.000 COP / $60 USD' },
+  { name: 'Pagos online (Stripe / PayPal)', price: '$600.000 COP / $145 USD' },
+  { name: 'Migrar tu web actual al nuevo diseño', price: 'Desde $400.000 COP / $95 USD' },
+  { name: 'Mantenimiento mensual (revisiones + parches)', price: '$250.000 COP / $60 USD al mes' },
+] as const;
+
+const process = [
   {
-    name: 'Página adicional',
-    price: '$250.000 COP / $60 USD',
+    n: '01',
+    title: 'Hablamos sin compromiso',
+    body: 'Media hora por videollamada. Te escucho, entiendo qué necesitas y te digo si puedo ayudarte.',
   },
   {
-    name: 'Integración con Stripe o PayPal',
-    price: '$600.000 COP / $145 USD',
+    n: '02',
+    title: 'Propuesta clara por escrito',
+    body: 'Documento con qué incluye, cuánto cuesta y cuándo lo entrego. 40 % para arrancar.',
   },
   {
-    name: 'Migración de contenido desde sitio existente',
-    price: 'Desde $400.000 COP / $95 USD',
+    n: '03',
+    title: 'Construcción a la vista',
+    body: 'Cada semana ves el avance en una URL real. Sin sorpresas al final.',
   },
   {
-    name: 'Mantenimiento mensual (parches + monitoreo)',
-    price: '$250.000 COP / $60 USD por mes',
+    n: '04',
+    title: 'Entrega y acompañamiento',
+    body: 'Pagas el 60 % restante al recibir tu web. Quince días de ajustes incluidos.',
   },
 ] as const;
 ---
 
 <BaseLayout
   title="Servicios"
-  description="Desarrollo web profesional con foco en seguridad: landings, sitios multipágina y auditorías OWASP. Precios transparentes en COP y USD."
+  description="Tres planes claros con precios visibles, en pesos colombianos y dólares. Webs cuidadas para personas y negocios que valoran el detalle."
 >
-  <section class="relative isolate overflow-hidden py-12 sm:py-16">
-    <div class="blob blob-blue top-[-50px] left-[-40px] h-[260px] w-[260px]" aria-hidden="true">
-    </div>
-
+  <section class="py-12 sm:py-20">
     <p
-      class="fade-in-up mb-4 text-sm font-medium tracking-wide text-[var(--color-accent)] uppercase"
+      class="fade-in-up mb-6 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase"
     >
-      Servicios
+      Planes
     </p>
     <h1
-      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+      class="fade-in-up fade-in-up-delay-1 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
     >
-      Tres formas concretas
-      <span class="gradient-text">de trabajar conmigo.</span>
+      Tres formas claras de <span class="gradient-text">trabajar juntos.</span>
     </h1>
-    <p class="mt-6 max-w-2xl text-lg text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-      Cada paquete incluye desarrollo, despliegue y los principios de seguridad que aplico siempre.
-      Precios en pesos colombianos y dólares para que compares sin sorpresas.
+    <p
+      class="fade-in-up fade-in-up-delay-2 mt-6 max-w-2xl text-lg text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+    >
+      Sin paquetes confusos. Sin letras pequeñas. Cada plan incluye todo lo necesario para que tu
+      web funcione bien desde el primer día.
     </p>
   </section>
 
-  <section aria-labelledby="plans-title" class="pb-8">
-    <h2 id="plans-title" class="sr-only">Paquetes</h2>
+  <section aria-labelledby="plans-title" class="pb-12">
+    <h2 id="plans-title" class="sr-only">Planes</h2>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
       {
         services.map((s, i) => (
           <article
             class:list={[
-              `reveal reveal-delay-${Math.min(i, 3)} lift flex flex-col rounded-xl border bg-[var(--color-bg)] p-6 shadow-sm dark:bg-[var(--color-bg-dark)]`,
+              `reveal reveal-delay-${Math.min(i, 3)} lift flex flex-col rounded-2xl border bg-[var(--color-bg)] p-7 dark:bg-[var(--color-bg-dark)]`,
               s.highlighted
-                ? 'border-[var(--color-accent)] bg-gradient-to-br from-[var(--color-accent)]/5 to-[var(--color-accent-2)]/5 ring-1 ring-[var(--color-accent)]'
+                ? 'border-[var(--color-accent)]'
                 : 'border-[var(--color-border)] dark:border-[var(--color-border-dark)]',
             ]}
           >
             {s.highlighted && (
-              <p class="mb-3 inline-block w-fit rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-3 py-0.5 text-xs font-semibold text-white">
-                Más popular
+              <p class="mb-4 inline-block w-fit rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-3 py-0.5 text-xs font-semibold text-white">
+                Más solicitado
               </p>
             )}
             <h3 class="text-xl font-semibold tracking-tight">{s.name}</h3>
-            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            <p class="mt-3 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
               {s.tagline}
             </p>
 
-            <div class="mt-5">
-              <p class="text-2xl font-bold tracking-tight">{s.copPrice}</p>
+            <div class="mt-6">
+              <p class="text-3xl font-semibold tracking-tight">{s.copPrice}</p>
               <p class="text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
                 ≈ {s.usdPrice}
               </p>
             </div>
 
-            <p class="mt-4 text-xs tracking-wide text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
-              Plazo: {s.duration}
+            <p class="mt-5 text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+              Entrega · {s.duration}
             </p>
-            <p class="mt-1 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            <p class="mt-2 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
               {s.ideal}
             </p>
 
-            <ul class="mt-5 flex-1 space-y-2 text-sm">
+            <ul class="mt-6 flex-1 space-y-3 text-sm">
               {s.includes.map((item) => (
-                <li class="flex gap-2">
+                <li class="flex gap-3">
                   <svg
                     class="h-5 w-5 shrink-0 text-[var(--color-accent)]"
                     viewBox="0 0 24 24"
@@ -166,9 +171,7 @@ const addons = [
                   >
                     <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
                   </svg>
-                  <span class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
-                    {item}
-                  </span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -176,10 +179,10 @@ const addons = [
             <a
               href="/contact"
               class:list={[
-                'mt-6 inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium transition-colors',
+                'mt-8 inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium transition-colors',
                 s.highlighted
                   ? 'glow-on-hover bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]'
-                  : 'border border-[var(--color-border)] text-[var(--color-fg)] hover:bg-[var(--color-border)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)] dark:hover:bg-[var(--color-border-dark)]',
+                  : 'border border-[var(--color-border)] text-[var(--color-fg)] hover:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)]',
               ]}
             >
               Cotizar este plan
@@ -190,21 +193,29 @@ const addons = [
     </div>
   </section>
 
+  <!-- ADDONS -->
   <section
     aria-labelledby="addons-title"
-    class="mt-8 border-t border-[var(--color-border)] py-12 dark:border-[var(--color-border-dark)]"
+    class="mt-12 border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <h2 id="addons-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
-      Complementos
-    </h2>
-    <p class="mt-3 max-w-2xl text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-      Si necesitas algo específico, se suma a cualquier paquete.
-    </p>
+    <div class="reveal max-w-2xl">
+      <p class="mb-4 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase">
+        Extras
+      </p>
+      <h2 id="addons-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        ¿Necesitas algo <span class="gradient-text">específico?</span>
+      </h2>
+      <p class="mt-4 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+        Se suma a cualquier plan. Si no está en la lista, escríbeme y lo cotizamos.
+      </p>
+    </div>
 
-    <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <ul class="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
       {
-        addons.map((a) => (
-          <li class="flex items-center justify-between rounded-lg border border-[var(--color-border)] px-4 py-3 text-sm dark:border-[var(--color-border-dark)]">
+        addons.map((a, i) => (
+          <li
+            class={`reveal reveal-delay-${Math.min(i, 3)} flex items-center justify-between gap-4 rounded-xl border border-[var(--color-border)] px-5 py-4 text-sm dark:border-[var(--color-border-dark)]`}
+          >
             <span>{a.name}</span>
             <span class="font-medium text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
               {a.price}
@@ -213,76 +224,56 @@ const addons = [
         ))
       }
     </ul>
-
-    <p class="mt-6 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-      ¿Necesitas algo que no está en la lista? Escríbeme y te paso un presupuesto a medida sin
-      compromiso.
-    </p>
   </section>
 
+  <!-- PROCESO -->
   <section
     aria-labelledby="process-title"
-    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+    class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <h2 id="process-title" class="text-2xl font-semibold tracking-tight sm:text-3xl">
-      Cómo es trabajar conmigo
-    </h2>
+    <div class="reveal max-w-2xl">
+      <p class="mb-4 text-xs font-medium tracking-wider text-[var(--color-accent)] uppercase">
+        Proceso
+      </p>
+      <h2 id="process-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        Así trabajamos <span class="gradient-text">juntos.</span>
+      </h2>
+    </div>
 
-    <ol class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-4">
-      <li
-        class="reveal lift rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
-      >
-        <span class="gradient-text text-3xl font-bold">1</span>
-        <h3 class="mt-2 font-semibold">Llamada inicial</h3>
-        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          30 minutos. Sin coste. Definimos alcance y plazos reales.
-        </p>
-      </li>
-      <li
-        class="reveal reveal-delay-1 lift rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
-      >
-        <span class="gradient-text text-3xl font-bold">2</span>
-        <h3 class="mt-2 font-semibold">Propuesta y anticipo</h3>
-        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          Documento por escrito con entregables. 40% para empezar.
-        </p>
-      </li>
-      <li
-        class="reveal reveal-delay-2 lift rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
-      >
-        <span class="gradient-text text-3xl font-bold">3</span>
-        <h3 class="mt-2 font-semibold">Desarrollo iterativo</h3>
-        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          Previews semanales en URL real para que veas el avance.
-        </p>
-      </li>
-      <li
-        class="reveal reveal-delay-3 lift rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
-      >
-        <span class="gradient-text text-3xl font-bold">4</span>
-        <h3 class="mt-2 font-semibold">Entrega + soporte</h3>
-        <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          60% restante al deploy. 15 días de ajustes incluidos.
-        </p>
-      </li>
+    <ol class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        process.map((step, i) => (
+          <li class={`reveal reveal-delay-${Math.min(i, 3)}`}>
+            <span class="gradient-text text-4xl font-semibold tracking-tight">{step.n}</span>
+            <h3 class="mt-4 font-semibold">{step.title}</h3>
+            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {step.body}
+            </p>
+          </li>
+        ))
+      }
     </ol>
   </section>
 
   <section
-    class="border-t border-[var(--color-border)] py-12 sm:py-16 dark:border-[var(--color-border-dark)]"
+    class="border-t border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div
+      class="reveal flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between"
+    >
       <div>
-        <h2 class="text-2xl font-semibold tracking-tight">¿Cuál encaja con tu proyecto?</h2>
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">
+          ¿Cuál encaja con tu proyecto?
+        </h2>
         <p class="mt-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-          Si dudas entre dos planes o quieres algo a medida, hablemos.
+          Si dudas entre dos planes, te ayudo a elegir sin compromiso.
         </p>
       </div>
       <a
         href="/contact"
-        class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
+        class="glow-on-hover inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
       >
-        Solicitar cotización
+        Pedir cotización
       </a>
     </div>
   </section>
