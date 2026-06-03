@@ -46,6 +46,7 @@ interface Concept {
   status?: ConceptStatus; // por defecto 'concept' (landing diseñada). 'building' = app en desarrollo
   liveUrl?: string; // si ya está desplegado
   repoUrl?: string; // repositorio público
+  previewImage?: string; // ruta local en /public, ej: '/projects/marfil-preview.webp'
 }
 
 const concepts: readonly Concept[] = [
@@ -60,6 +61,7 @@ const concepts: readonly Concept[] = [
     imageGradient: 'linear-gradient(135deg, #EEF5F7 0%, #15B5AE 70%, #0E3A47 100%)',
     liveUrl: 'https://marfil-dental.vercel.app',
     repoUrl: 'https://github.com/sogom01/marfil-dental',
+    previewImage: '/projects/marfil-preview.webp',
   },
   {
     name: 'Pan y Ricuras',
@@ -72,6 +74,7 @@ const concepts: readonly Concept[] = [
     imageGradient: 'linear-gradient(135deg, #1a0f07 0%, #2e1c0a 50%, #c99e4c 100%)',
     liveUrl: 'https://pan-y-ricuras-chipre.vercel.app/',
     repoUrl: 'https://github.com/sogom01/pan-y-ricuras-chipre',
+    previewImage: '/projects/pan-y-ricuras-preview.webp',
   },
   {
     name: 'MotoZone',
@@ -297,8 +300,8 @@ const getBadge = (c: Concept) => {
           <article
             class={`reveal reveal-delay-${Math.min(i, 3)} lift group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
           >
-            {/* Miniatura: screenshot real para proyectos en línea, gradiente para conceptos */}
-            {c.liveUrl ? (
+            {/* Miniatura: screenshot local para proyectos en línea, gradiente para conceptos */}
+            {c.previewImage ? (
               <div class="relative flex h-48 flex-col overflow-hidden" aria-hidden="true">
                 {/* Barra de navegador estilo macOS */}
                 <div class="flex shrink-0 items-center gap-1.5 bg-[#1a1a1a] px-3 py-1.5">
@@ -306,13 +309,13 @@ const getBadge = (c: Concept) => {
                   <span class="h-2 w-2 rounded-full bg-[#febc2e]" />
                   <span class="h-2 w-2 rounded-full bg-[#28c840]" />
                   <span class="ml-1 flex-1 truncate rounded bg-[#2d2d2d] px-2 py-0.5 text-[9px] text-gray-400">
-                    {c.liveUrl.replace('https://', '')}
+                    {c.liveUrl?.replace('https://', '')}
                   </span>
                 </div>
-                {/* Screenshot del sitio vía Thum.io */}
-                <div class="relative flex-1 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                {/* Screenshot local */}
+                <div class="relative flex-1 overflow-hidden">
                   <img
-                    src={`https://image.thum.io/get/width/640/crop/400/${c.liveUrl}`}
+                    src={c.previewImage}
                     alt={`Vista previa de ${c.name}`}
                     class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
