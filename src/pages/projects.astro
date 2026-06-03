@@ -297,32 +297,65 @@ const getBadge = (c: Concept) => {
           <article
             class={`reveal reveal-delay-${Math.min(i, 3)} lift group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
           >
-            {/* Miniatura del concepto: paleta visual */}
-            <div
-              class="relative h-48 overflow-hidden"
-              style={`background: ${c.imageGradient};`}
-              aria-hidden="true"
-            >
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(255,255,255,0.18),transparent_55%)]" />
-              <div class="absolute right-5 bottom-5 flex gap-1.5">
-                {c.palette.map((color) => (
-                  <span
-                    class="h-5 w-5 rounded-full border border-white/40 shadow-sm"
-                    style={`background: ${color};`}
+            {/* Miniatura: screenshot real para proyectos en línea, gradiente para conceptos */}
+            {c.liveUrl ? (
+              <div class="relative flex h-48 flex-col overflow-hidden" aria-hidden="true">
+                {/* Barra de navegador estilo macOS */}
+                <div class="flex shrink-0 items-center gap-1.5 bg-[#1a1a1a] px-3 py-1.5">
+                  <span class="h-2 w-2 rounded-full bg-[#ff5f57]" />
+                  <span class="h-2 w-2 rounded-full bg-[#febc2e]" />
+                  <span class="h-2 w-2 rounded-full bg-[#28c840]" />
+                  <span class="ml-1 flex-1 truncate rounded bg-[#2d2d2d] px-2 py-0.5 text-[9px] text-gray-400">
+                    {c.liveUrl.replace('https://', '')}
+                  </span>
+                </div>
+                {/* Screenshot del sitio vía Thum.io */}
+                <div class="relative flex-1 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <img
+                    src={`https://image.thum.io/get/width/640/crop/400/${c.liveUrl}`}
+                    alt={`Vista previa de ${c.name}`}
+                    class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
                   />
-                ))}
+                  <div class="absolute top-3 left-3">
+                    <span
+                      class:list={[
+                        'inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase shadow-sm backdrop-blur-sm',
+                        getBadge(c).bgClass,
+                      ]}
+                    >
+                      {getBadge(c).text}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div class="absolute top-5 left-5">
-                <span
-                  class:list={[
-                    'inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase shadow-sm backdrop-blur-sm',
-                    getBadge(c).bgClass,
-                  ]}
-                >
-                  {getBadge(c).text}
-                </span>
+            ) : (
+              <div
+                class="relative h-48 overflow-hidden"
+                style={`background: ${c.imageGradient};`}
+                aria-hidden="true"
+              >
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(255,255,255,0.18),transparent_55%)]" />
+                <div class="absolute right-5 bottom-5 flex gap-1.5">
+                  {c.palette.map((color) => (
+                    <span
+                      class="h-5 w-5 rounded-full border border-white/40 shadow-sm"
+                      style={`background: ${color};`}
+                    />
+                  ))}
+                </div>
+                <div class="absolute top-5 left-5">
+                  <span
+                    class:list={[
+                      'inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase shadow-sm backdrop-blur-sm',
+                      getBadge(c).bgClass,
+                    ]}
+                  >
+                    {getBadge(c).text}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
 
             <div class="flex flex-1 flex-col p-7">
               <p class="text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
