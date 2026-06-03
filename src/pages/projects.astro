@@ -115,6 +115,20 @@ const concepts: readonly Concept[] = [
   },
 ];
 
+// Mapa de iconos de tecnología — Simple Icons CDN (cdn.simpleicons.org/{slug}/{hex})
+// invertDark: true → el icono es negro en su color de marca; se invierte en dark mode
+const techIconMap: Record<string, { slug: string; color?: string; invertDark?: boolean }> = {
+  Astro: { slug: 'astro', color: 'FF5D01' },
+  TypeScript: { slug: 'typescript', color: '3178C6' },
+  'Tailwind CSS': { slug: 'tailwindcss', color: '06B6D4' },
+  Supabase: { slug: 'supabase', color: '3ECF8E' },
+  Zod: { slug: 'zod', color: '3E67B1' },
+  Vercel: { slug: 'vercel', invertDark: true },
+  'Next.js': { slug: 'nextdotjs', invertDark: true },
+  HTML: { slug: 'html5', color: 'E34F26' },
+  JavaScript: { slug: 'javascript', color: 'F7DF1E' },
+};
+
 // Etiquetas dinámicas por status
 const statusLabels: Record<ConceptStatus, { text: string; bgClass: string }> = {
   concept: { text: 'Concepto', bgClass: 'bg-white/90 text-[var(--color-fg)]' },
@@ -322,12 +336,37 @@ const getBadge = (c: Concept) => {
                 <p class="text-[10px] font-semibold tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
                   Stack
                 </p>
-                <ul class="mt-2 flex flex-wrap gap-1.5">
-                  {c.stack.map((s) => (
-                    <li class="rounded-md border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 px-2 py-0.5 text-[11px] font-medium text-[var(--color-accent)] dark:border-[var(--color-accent)]/25 dark:bg-[var(--color-accent)]/10">
-                      {s}
-                    </li>
-                  ))}
+                <ul class="mt-2 flex flex-wrap gap-2">
+                  {c.stack.map((s) => {
+                    const tech = techIconMap[s];
+                    const src = tech
+                      ? `https://cdn.simpleicons.org/${tech.slug}${tech.color ? '/' + tech.color : ''}`
+                      : undefined;
+                    return (
+                      <li class="group flex flex-col items-center gap-1 rounded-xl border border-[var(--color-border)] px-3 py-2 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent)]/40 hover:shadow-sm dark:border-[var(--color-border-dark)]">
+                        {src ? (
+                          <img
+                            src={src}
+                            alt={s}
+                            width="20"
+                            height="20"
+                            class:list={[
+                              'shrink-0 transition-transform duration-200 group-hover:scale-110',
+                              { 'dark:invert': tech?.invertDark },
+                            ]}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span class="flex h-5 w-5 items-center justify-center text-sm font-bold text-[var(--color-accent)]">
+                            {s.charAt(0)}
+                          </span>
+                        )}
+                        <span class="text-[10px] leading-none text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                          {s}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               {(c.liveUrl || c.repoUrl) && (
