@@ -56,7 +56,7 @@ const concepts: readonly Concept[] = [
     description:
       'Landing fresca y de confianza para una clínica dental. Cards flotantes con badges de credibilidad, paleta teal+navy+menta, pensada para reducir la ansiedad del visitante y guiarlo a agendar.',
     palette: ['#EEF5F7', '#15B5AE', '#0E3A47', '#D7EFEC'],
-    stack: ['UI accesible', 'Trust signals', 'WhatsApp booking'],
+    stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #EEF5F7 0%, #15B5AE 70%, #0E3A47 100%)',
     liveUrl: 'https://marfil-dental.vercel.app',
     repoUrl: 'https://github.com/sogom01/marfil-dental',
@@ -68,7 +68,7 @@ const concepts: readonly Concept[] = [
     description:
       'Carta digital para panadería tradicional de Chipre (Manizales). Vista cliente con búsqueda, filtros por categoría y agrupación visual estilo menú impreso. Panel admin protegido con login que permite añadir, editar, marcar agotado y eliminar productos en vivo. Paleta cálida marrón + dorado, tipografía Cormorant Garamond.',
     palette: ['#1a0f07', '#c99e4c', '#f5ead8', '#4a7c59'],
-    stack: ['React + Hooks', 'CRUD admin', 'Login protegido', 'UI editorial cálida'],
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #1a0f07 0%, #2e1c0a 50%, #c99e4c 100%)',
     status: 'building',
   },
@@ -79,7 +79,7 @@ const concepts: readonly Concept[] = [
     description:
       'App completa de e-commerce para venta de repuestos y accesorios de moto. Catálogo con búsqueda, filtros por categoría y precio, sort múltiple, carrito persistente con drawer lateral, modal de detalle por producto, badges de stock bajo y ticker animado. Diseño dark con acento crimson, tipografía Playfair Display.',
     palette: ['#030000', '#9f1239', '#e11d48', '#f43f5e'],
-    stack: ['React + Hooks', 'Carrito persistente', 'Búsqueda y filtros', 'UI dark editorial'],
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #030000 0%, #9f1239 60%, #e11d48 100%)',
     status: 'building',
   },
@@ -90,7 +90,7 @@ const concepts: readonly Concept[] = [
     description:
       'Landing cálida y editorial para un café de especialidad en Manizales. Tipografía serif con cursivas, paleta crema y arcilla, atmósfera de finca cafetera.',
     palette: ['#F3EAD9', '#B85C38', '#2A1E16', '#E7A879'],
-    stack: ['Diseño editorial', 'Fraunces serif', 'Animaciones suaves'],
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     imageGradient: 'linear-gradient(135deg, #F3EAD9 0%, #B85C38 50%, #2A1E16 100%)',
   },
   {
@@ -100,7 +100,7 @@ const concepts: readonly Concept[] = [
     description:
       'Landing high-contrast para un gimnasio funcional. Tipografía display Anton, paleta dark con acento volt (verde-amarillo neón), energía industrial y planes de membresía.',
     palette: ['#0B0C0E', '#CCFF00', '#191C21', '#F4F6F4'],
-    stack: ['Tipografía display', 'Dark theme', 'Pricing UI'],
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     imageGradient: 'linear-gradient(135deg, #0B0C0E 0%, #191C21 60%, #CCFF00 100%)',
   },
   {
@@ -110,7 +110,7 @@ const concepts: readonly Concept[] = [
     description:
       'Landing editorial-agencia con tipografía Bricolage Grotesque, marquee animado, lista de servicios estilo print y portfolio de casos. Para un estudio que necesita demostrar cultura visual desde el primer pixel.',
     palette: ['#F2F0EA', '#2A2BF5', '#14130F', '#FBFAF6'],
-    stack: ['Editorial', 'Marquee animado', 'Hover-slide'],
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     imageGradient: 'linear-gradient(135deg, #F2F0EA 0%, #2A2BF5 60%, #14130F 100%)',
   },
 ];
@@ -318,13 +318,18 @@ const getBadge = (c: Concept) => {
               <p class="mt-4 flex-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
                 {c.description}
               </p>
-              <ul class="mt-5 flex flex-wrap gap-1.5">
-                {c.stack.map((s) => (
-                  <li class="rounded-md border border-[var(--color-border)] px-2 py-0.5 text-[11px] dark:border-[var(--color-border-dark)]">
-                    {s}
-                  </li>
-                ))}
-              </ul>
+              <div class="mt-5">
+                <p class="text-[10px] font-semibold tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+                  Stack
+                </p>
+                <ul class="mt-2 flex flex-wrap gap-1.5">
+                  {c.stack.map((s) => (
+                    <li class="rounded-md border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 px-2 py-0.5 text-[11px] font-medium text-[var(--color-accent)] dark:border-[var(--color-accent)]/25 dark:bg-[var(--color-accent)]/10">
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               {(c.liveUrl || c.repoUrl) && (
                 <div class="mt-6 flex flex-wrap gap-3">
                   {c.liveUrl && (
