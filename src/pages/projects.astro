@@ -51,6 +51,19 @@ interface Concept {
 
 const concepts: readonly Concept[] = [
   {
+    name: 'Café San Martin',
+    category: 'Café de origen · Sabor, Tradición y Origen',
+    tagline: 'Donde la montaña se vuelve tinto.',
+    description:
+      'Landing cálida y editorial para un café de especialidad en Pereira. Tipografía serif con cursivas, paleta crema y arcilla, atmósfera de finca cafetera.',
+    palette: ['#F3EAD9', '#B85C38', '#2A1E16', '#E7A879'],
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    imageGradient: 'linear-gradient(135deg, #F3EAD9 0%, #B85C38 50%, #2A1E16 100%)',
+    liveUrl: 'https://cafe-san-martin.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/cafe-san-martin',
+    previewImage: '/projects/cafe-san-martin.preview.webp',
+  },
+  {
     name: 'Marfil',
     category: 'Clínica dental · Salud',
     tagline: 'Sonríe con total confianza.',
@@ -90,19 +103,6 @@ const concepts: readonly Concept[] = [
     previewImage: '/projects/marketing-agency-pulso.preview.webp',
   },
   {
-    name: 'Aurora',
-    category: 'Café de origen · Restauración',
-    tagline: 'Donde la montaña se vuelve tinto.',
-    description:
-      'Landing cálida y editorial para un café de especialidad en Manizales. Tipografía serif con cursivas, paleta crema y arcilla, atmósfera de finca cafetera.',
-    palette: ['#F3EAD9', '#B85C38', '#2A1E16', '#E7A879'],
-    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
-    imageGradient: 'linear-gradient(135deg, #F3EAD9 0%, #B85C38 50%, #2A1E16 100%)',
-    liveUrl: 'https://aurora-cafe.vercel.app/',
-    repoUrl: 'https://github.com/sogom01/aurora-cafe',
-    previewImage: '/projects/aurora-cafe.preview.webp',
-  },
-  {
     name: 'Motor Store',
     category: 'E-commerce · Repuestos de moto',
     tagline: 'Todo lo que tu moto necesita, en un solo lugar.',
@@ -115,7 +115,7 @@ const concepts: readonly Concept[] = [
     repoUrl: 'https://github.com/sogom01/motorstore',
     previewImage: '/projects/motorstore-preview.webp',
   },
-    {
+  {
     name: 'Pan y Ricuras',
     category: 'Carta digital · Panadería',
     tagline: 'Bienvenido — explora nuestra carta.',
@@ -131,18 +131,20 @@ const concepts: readonly Concept[] = [
 ];
 
 // Mapa de iconos de tecnología — Simple Icons CDN (cdn.simpleicons.org/{slug}/{hex})
+// Usamos Map en lugar de objeto plano para evitar la regla security/detect-object-injection
 // invertDark: true → el icono es negro en su color de marca; se invierte en dark mode
-const techIconMap: Record<string, { slug: string; color?: string; invertDark?: boolean }> = {
-  Astro: { slug: 'astro', color: 'FF5D01' },
-  TypeScript: { slug: 'typescript', color: '3178C6' },
-  'Tailwind CSS': { slug: 'tailwindcss', color: '06B6D4' },
-  Supabase: { slug: 'supabase', color: '3ECF8E' },
-  Zod: { slug: 'zod', color: '3E67B1' },
-  Vercel: { slug: 'vercel', invertDark: true },
-  'Next.js': { slug: 'nextdotjs', invertDark: true },
-  HTML: { slug: 'html5', color: 'E34F26' },
-  JavaScript: { slug: 'javascript', color: 'F7DF1E' },
-};
+type TechIcon = { slug: string; color?: string; invertDark?: boolean };
+const techIconMap = new Map<string, TechIcon>([
+  ['Astro', { slug: 'astro', color: 'FF5D01' }],
+  ['TypeScript', { slug: 'typescript', color: '3178C6' }],
+  ['Tailwind CSS', { slug: 'tailwindcss', color: '06B6D4' }],
+  ['Supabase', { slug: 'supabase', color: '3ECF8E' }],
+  ['Zod', { slug: 'zod', color: '3E67B1' }],
+  ['Vercel', { slug: 'vercel', invertDark: true }],
+  ['Next.js', { slug: 'nextdotjs', invertDark: true }],
+  ['HTML', { slug: 'html5', color: 'E34F26' }],
+  ['JavaScript', { slug: 'javascript', color: 'F7DF1E' }],
+]);
 
 // Etiquetas dinámicas por status
 const statusLabels: Record<ConceptStatus, { text: string; bgClass: string }> = {
@@ -386,7 +388,7 @@ const getBadge = (c: Concept) => {
                 </p>
                 <ul class="mt-2 flex flex-wrap gap-2">
                   {c.stack.map((s) => {
-                    const tech = techIconMap[s];
+                    const tech = techIconMap.get(s);
                     const src = tech
                       ? `https://cdn.simpleicons.org/${tech.slug}${tech.color ? '/' + tech.color : ''}`
                       : undefined;
