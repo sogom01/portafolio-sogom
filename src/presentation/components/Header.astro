@@ -1,10 +1,8 @@
 ---
 const navItems = [
-  { href: '/', label: 'Inicio' },
-  { href: '/about', label: 'Sobre mí' },
-  { href: '/services', label: 'Servicios' },
-  { href: '/projects', label: 'Proyectos' },
-  { href: '/contact', label: 'Contacto' },
+  { href: '/about', label: 'Sobre mí', no: '01' },
+  { href: '/services', label: 'Servicios', no: '02' },
+  { href: '/projects', label: 'Proyectos', no: '03' },
 ] as const;
 
 const currentPath = Astro.url.pathname;
@@ -35,7 +33,7 @@ const isActive = (href: string) =>
       </summary>
       <nav
         aria-label="Principal (móvil)"
-        class="absolute right-0 mt-2 w-48 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2 shadow-lg dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
+        class="absolute right-0 mt-2 w-52 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2 shadow-lg dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
       >
         <ul class="flex flex-col gap-1">
           {
@@ -45,24 +43,35 @@ const isActive = (href: string) =>
                   href={item.href}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                   class:list={[
-                    'block rounded px-3 py-2 text-sm',
+                    'flex items-center gap-2.5 rounded px-3 py-2 text-sm',
                     isActive(item.href)
                       ? 'bg-[var(--color-accent)] text-white'
                       : 'text-[var(--color-muted)] hover:bg-[var(--color-border)] dark:hover:bg-[var(--color-border-dark)]',
                   ]}
                 >
+                  <span class="font-mono text-[10px] opacity-50">{item.no}</span>
                   {item.label}
                 </a>
               </li>
             ))
           }
+          <li
+            class="mt-1 border-t border-[var(--color-border)] pt-1 dark:border-[var(--color-border-dark)]"
+          >
+            <a
+              href="/contact"
+              class="block rounded bg-[var(--color-accent)] px-3 py-2 text-sm font-medium text-white"
+            >
+              Contacto
+            </a>
+          </li>
         </ul>
       </nav>
     </details>
 
     <!-- Navegación desktop. -->
     <nav aria-label="Principal" class="hidden sm:block">
-      <ul class="flex items-center gap-1">
+      <ul class="flex items-center gap-0.5">
         {
           navItems.map((item) => (
             <li>
@@ -70,17 +79,36 @@ const isActive = (href: string) =>
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 class:list={[
-                  'rounded-md px-3 py-1.5 text-sm transition-colors',
+                  'group flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors',
                   isActive(item.href)
-                    ? 'bg-[var(--color-accent)] text-white'
-                    : 'text-[var(--color-muted)] hover:bg-[var(--color-border)] hover:text-[var(--color-fg)] dark:text-[var(--color-muted-dark)] dark:hover:bg-[var(--color-border-dark)] dark:hover:text-[var(--color-fg-dark)]',
+                    ? 'text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]'
+                    : 'text-[var(--color-muted)] hover:text-[var(--color-fg)] dark:text-[var(--color-muted-dark)] dark:hover:text-[var(--color-fg-dark)]',
                 ]}
               >
+                <span
+                  class:list={[
+                    'font-mono text-[10px] transition-colors',
+                    isActive(item.href)
+                      ? 'text-[var(--color-accent)]'
+                      : 'text-[var(--color-muted)]/60 group-hover:text-[var(--color-accent)]/70 dark:text-[var(--color-muted-dark)]/60',
+                  ]}
+                >
+                  {item.no}
+                </span>
                 {item.label}
               </a>
             </li>
           ))
         }
+        <li class="ml-2">
+          <a
+            href="/contact"
+            aria-current={isActive('/contact') ? 'page' : undefined}
+            class="rounded-md bg-[var(--color-accent)] px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-[var(--color-accent-hover)]"
+          >
+            Contacto
+          </a>
+        </li>
         <li>
           <button
             id="theme-toggle"

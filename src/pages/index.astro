@@ -80,53 +80,69 @@ const stats = [
   <!-- ============================================================
        HERO editorial
        ============================================================ -->
-  <section aria-labelledby="hero-title" class="py-12 sm:py-20">
+  <section aria-labelledby="hero-title" class="pt-16 pb-16 sm:pt-24 sm:pb-24">
     <div class="max-w-4xl">
-      <p
-        class="fade-in-up eyebrow-dot mb-6 inline-flex items-center text-xs font-medium tracking-wider uppercase"
-      >
-        Aceptando nuevos proyectos
-      </p>
+      <div class="fade-in-up mb-8 flex items-center gap-3">
+        <span
+          class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"
+        ></span>
+        <span
+          class="font-mono text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
+        >
+          Disponible para nuevos proyectos
+        </span>
+      </div>
 
       <h1
         id="hero-title"
         class="fade-in-up fade-in-up-delay-1 max-w-3xl text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
       >
-        Hago webs que la gente
-        <span class="italic-accent">recuerda</span>.
+        Desarrollador web.<br />
+        <span class="text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+          >Construyo sitios que funcionan.</span
+        >
       </h1>
 
       <p
-        class="fade-in-up fade-in-up-delay-2 mt-8 max-w-xl text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+        class="fade-in-up fade-in-up-delay-2 mt-8 max-w-lg text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
       >
-        Soy Juan Sebastián. Diseño y construyo sitios web cuidados al detalle — rápidos, seguros y
-        agradables de usar. El tipo de web del que tus clientes hablan después de cerrar el
-        navegador.
+        Soy Juan Sebastián. Diseño y construyo sitios rápidos, seguros y a la medida — el tipo de
+        web del que tus clientes hablan después de cerrar el navegador.
       </p>
 
-      <div class="fade-in-up fade-in-up-delay-3 mt-10 flex flex-col gap-3 sm:flex-row">
+      <div class="fade-in-up fade-in-up-delay-3 mt-10 flex flex-wrap gap-3">
         <a
-          href="/services"
+          href="/projects"
           class="glow-on-hover inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
         >
-          Ver planes y precios
-          <svg
-            class="ml-2 h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"></path>
-          </svg>
+          Ver proyectos →
         </a>
         <a
           href="/contact"
-          class="inline-flex items-center justify-center rounded-md px-7 py-3.5 text-sm font-medium text-[var(--color-fg)] transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-fg-dark)]"
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] px-7 py-3.5 text-sm font-medium text-[var(--color-fg)] transition-colors hover:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)]"
         >
-          O escríbeme directamente →
+          Hablemos
         </a>
+      </div>
+
+      <div class="fade-in-up fade-in-up-delay-3 mt-12 flex flex-wrap gap-2">
+        {
+          [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'TypeScript',
+            'Astro',
+            'Next.js',
+            'Tailwind',
+            'Supabase',
+            'Git',
+          ].map((tech) => (
+            <span class="rounded-md border border-[var(--color-border)] px-3 py-1 font-mono text-xs text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-muted-dark)]">
+              {tech}
+            </span>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -136,15 +152,19 @@ const stats = [
        ============================================================ -->
   <section
     aria-labelledby="stats-title"
-    class="border-y border-[var(--color-border)] py-12 dark:border-[var(--color-border-dark)]"
+    class="border-y border-[var(--color-border)] py-10 dark:border-[var(--color-border-dark)]"
   >
     <h2 id="stats-title" class="sr-only">Lo que recibes</h2>
-    <div class="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4">
+    <div
+      class="flex flex-wrap items-center divide-x divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]"
+    >
       {
         stats.map((s, i) => (
-          <div class={`reveal reveal-delay-${Math.min(i, 3)}`}>
-            <p class="big-number text-5xl sm:text-6xl">{s.value}</p>
-            <p class="mt-2 text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+          <div
+            class={`reveal reveal-delay-${Math.min(i, 3)} flex-1 px-6 py-2 first:pl-0 last:pr-0`}
+          >
+            <p class="big-number text-4xl sm:text-5xl">{s.value}</p>
+            <p class="mt-1 text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
               {s.label}
             </p>
           </div>
@@ -154,38 +174,36 @@ const stats = [
   </section>
 
   <!-- ============================================================
-       VALUE PROPS — beneficios con número grande editorial
+       VALUE PROPS — filas tipo lista editorial
        ============================================================ -->
   <section
     aria-labelledby="value-title"
     class="border-b border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <div class="reveal flex flex-wrap items-end justify-between gap-6">
-      <div class="max-w-xl">
-        <p
-          class="eyebrow-dot mb-4 inline-flex items-center text-xs font-medium tracking-wider uppercase"
-        >
-          Por qué trabajar conmigo
+    <div class="reveal mb-12 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase">
+          // Por qué trabajar conmigo
         </p>
         <h2 id="value-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Cuatro cosas que recibes <span class="italic-accent">siempre</span>.
+          Lo que recibes <span class="italic-accent">siempre</span>.
         </h2>
       </div>
       <p class="max-w-xs text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-        Sin importar el tamaño del proyecto, todas mis webs cumplen lo mismo.
+        Sin importar el tamaño del proyecto.
       </p>
     </div>
 
-    <ul class="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:gap-12">
+    <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
       {
         valueProps.map((v, i) => (
-          <li class={`reveal reveal-delay-${Math.min(i, 3)} flex gap-6`}>
-            <span class="big-number shrink-0 text-5xl leading-none">
+          <li class={`reveal reveal-delay-${Math.min(i, 3)} flex items-start gap-8 py-8`}>
+            <span class="big-number w-12 shrink-0 text-4xl leading-none tabular-nums">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <div>
+            <div class="flex flex-1 flex-wrap items-baseline justify-between gap-4">
               <h3 class="text-xl font-semibold tracking-tight">{v.title}</h3>
-              <p class="mt-2 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              <p class="max-w-md text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
                 {v.body}
               </p>
             </div>
@@ -196,18 +214,16 @@ const stats = [
   </section>
 
   <!-- ============================================================
-       SERVICES PREVIEW — filas editoriales con hover-slide
+       SERVICES PREVIEW — filas editoriales minimalistas
        ============================================================ -->
   <section
     aria-labelledby="services-preview-title"
     class="border-b border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
   >
-    <div class="reveal flex flex-wrap items-end justify-between gap-6">
-      <div class="max-w-xl">
-        <p
-          class="eyebrow-dot mb-4 inline-flex items-center text-xs font-medium tracking-wider uppercase"
-        >
-          Cómo trabajamos
+    <div class="reveal mb-12 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase">
+          // Cómo trabajamos
         </p>
         <h2 id="services-preview-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
           Tres planes <span class="italic-accent">claros y honestos</span>.
@@ -215,11 +231,11 @@ const stats = [
       </div>
       <a
         href="/services"
-        class="group inline-flex items-center text-sm font-medium text-[var(--color-accent)]"
+        class="group inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)]"
       >
-        Ver el detalle
+        Ver todos los detalles
         <svg
-          class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+          class="h-4 w-4 transition-transform group-hover:translate-x-1"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -231,57 +247,32 @@ const stats = [
       </a>
     </div>
 
-    <ul class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+    <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
       {
         servicesPreview.map((s, i) => (
           <li
-            class:list={[
-              `reveal reveal-delay-${Math.min(i, 3)} lift flex flex-col rounded-2xl border bg-[var(--color-bg)] p-8 dark:bg-[var(--color-bg-dark)]`,
-              s.highlighted
-                ? 'border-[var(--color-accent)] shadow-[var(--color-accent)]/5 shadow-lg'
-                : 'border-[var(--color-border)] dark:border-[var(--color-border-dark)]',
-            ]}
+            class={`reveal reveal-delay-${Math.min(i, 3)} group flex flex-wrap items-center gap-6 py-8`}
           >
-            <div class="flex items-center justify-between">
-              <span class="big-number text-4xl leading-none">{s.no}</span>
+            <span class="big-number w-12 shrink-0 text-4xl leading-none tabular-nums">{s.no}</span>
+            <div class="flex flex-1 flex-wrap items-baseline gap-x-6 gap-y-1">
+              <h3 class="text-xl font-semibold tracking-tight">{s.name}</h3>
+              <p class="text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                {s.description}
+              </p>
+            </div>
+            <div class="flex items-center gap-6 text-right">
+              <div>
+                <p class="italic-accent text-xl">{s.price}</p>
+                <p class="mt-0.5 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                  {s.duration}
+                </p>
+              </div>
               {s.highlighted && (
                 <span class="rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-3 py-0.5 text-[10px] font-semibold tracking-wider text-white uppercase">
-                  Más solicitado
+                  Popular
                 </span>
               )}
             </div>
-
-            <h3 class="mt-6 text-xl font-semibold tracking-tight sm:text-2xl">{s.name}</h3>
-            <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-              {s.description}
-            </p>
-
-            <div class="mt-6 border-t border-[var(--color-border)] pt-6 dark:border-[var(--color-border-dark)]">
-              <p class="italic-accent text-3xl leading-none">{s.price}</p>
-              <p class="mt-2 text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
-                Entrega en {s.duration}
-              </p>
-            </div>
-
-            <ul class="mt-6 flex-1 space-y-2.5 text-sm">
-              {s.features.map((f) => (
-                <li class="flex gap-2.5">
-                  <svg
-                    class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    aria-hidden="true"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
-                  </svg>
-                  <span class="text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-                    {f}
-                  </span>
-                </li>
-              ))}
-            </ul>
           </li>
         ))
       }

@@ -402,7 +402,7 @@ const getBadge = (c: Concept) => {
                   <img
                     src={c.previewImage}
                     alt={`Vista previa de ${c.name}`}
-                    class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    class="h-full w-full object-cover object-top [filter:grayscale(1)_brightness(0.75)] transition-all duration-700 group-hover:scale-105 group-hover:[filter:grayscale(0)_brightness(0.95)]"
                     loading="lazy"
                   />
                   {/* Overlay "Ver proyecto" al hacer hover */}
