@@ -51,6 +51,20 @@ interface Concept {
 
 const concepts: readonly Concept[] = [
   {
+    name: 'Stock Core',
+    category: 'Gestión empresarial · Inventario',
+    tagline: 'Tu inventario, bajo control real.',
+    description:
+      'App web de gestión de inventario con roles diferenciados (admin, gestor y visor). Permite registrar productos, registrar entradas y salidas de stock, y consultar el historial de movimientos desde un dashboard limpio. Autenticación segura con Auth.js, datos persistidos en PostgreSQL vía Prisma y validaciones compartidas con Zod en front y back.',
+    palette: ['#0f172a', '#10b981', '#1e293b', '#d1fae5'],
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Zod', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #10b981 100%)',
+    status: 'building',
+    liveUrl: 'https://stockcore.vercel.app//',
+    repoUrl: 'https://github.com/sogom01/stockcore',
+    previewImage: '/projects/stockcore.preview.webp',
+  },
+  {
     name: 'Marfil',
     category: 'Clínica dental · Salud',
     tagline: 'Sonríe con total confianza.',
@@ -141,17 +155,6 @@ const concepts: readonly Concept[] = [
     liveUrl: 'https://motorstore.vercel.app//',
     repoUrl: 'https://github.com/sogom01/motor-store',
     previewImage: '/projects/motorstore-preview.webp',
-  },
-  {
-    name: 'AdminInvent',
-    category: 'Gestión empresarial · Inventario',
-    tagline: 'Tu inventario, bajo control real.',
-    description:
-      'App web de gestión de inventario con roles diferenciados (admin, gestor y visor). Permite registrar productos, registrar entradas y salidas de stock, y consultar el historial de movimientos desde un dashboard limpio. Autenticación segura con Auth.js, datos persistidos en PostgreSQL vía Prisma y validaciones compartidas con Zod en front y back.',
-    palette: ['#0f172a', '#10b981', '#1e293b', '#d1fae5'],
-    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Zod', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #10b981 100%)',
-    status: 'building',
   },
   {
     name: 'Teclook',
