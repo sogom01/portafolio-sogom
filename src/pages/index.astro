@@ -3,86 +3,160 @@ export const prerender = true;
 
 import BaseLayout from '../presentation/layouts/BaseLayout.astro';
 
-const valueProps = [
-  {
-    title: 'Carga al instante',
-    body: 'Tu web aparece antes de que el visitante pierda interés. Velocidad real, en cualquier dispositivo.',
-  },
-  {
-    title: 'Protegida desde el primer día',
-    body: 'Cuido los datos de tus visitantes como si fueran míos. Sin formularios fáciles de hackear, sin spam.',
-  },
-  {
-    title: 'Se ve perfecta en móvil',
-    body: 'La mayoría de la gente entrará desde su teléfono. Diseñada para que ese sea su mejor lugar.',
-  },
-  {
-    title: 'Para todos, sin excepción',
-    body: 'Accesible para personas con discapacidad visual, motora o cognitiva. Buena para tus usuarios y para Google.',
-  },
-] as const;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
-interface ServicePreview {
-  no: string;
+/* ── Proyectos ─────────────────────────────────────────────── */
+type TechIcon = { slug: string; color?: string; invertDark?: boolean };
+const techIconMap = new Map<string, TechIcon>([
+  ['Astro', { slug: 'astro', color: 'FF5D01' }],
+  ['TypeScript', { slug: 'typescript', color: '3178C6' }],
+  ['Tailwind CSS', { slug: 'tailwindcss', color: '06B6D4' }],
+  ['Tailwind', { slug: 'tailwindcss', color: '06B6D4' }],
+  ['Supabase', { slug: 'supabase', color: '3ECF8E' }],
+  ['Zod', { slug: 'zod', color: '3E67B1' }],
+  ['Vercel', { slug: 'vercel', invertDark: true }],
+  ['Next.js', { slug: 'nextdotjs', invertDark: true }],
+  ['HTML', { slug: 'html5', color: 'E34F26' }],
+  ['JavaScript', { slug: 'javascript', color: 'F7DF1E' }],
+  ['Prisma', { slug: 'prisma', invertDark: true }],
+  ['PostgreSQL', { slug: 'postgresql', color: '4169E1' }],
+  ['Cloudflare', { slug: 'cloudflare', color: 'F6821F' }],
+  ['Resend', { slug: 'resend', invertDark: true }],
+]);
+
+interface Project {
   name: string;
-  price: string;
-  duration: string;
-  description: string;
-  features: readonly string[];
-  highlighted?: boolean;
+  category: string;
+  tagline: string;
+  stack: readonly string[];
+  liveUrl?: string;
+  repoUrl?: string;
+  previewImage?: string;
+  imageGradient: string;
+  palette: readonly string[];
+  status?: 'building';
 }
 
-const servicesPreview: readonly ServicePreview[] = [
+const projects: readonly Project[] = [
+  {
+    name: 'SIEMLogs',
+    category: 'Ciberseguridad · Monitoreo',
+    tagline: 'Visibilidad total sobre tus incidentes.',
+    stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 50%, #6C63FF 100%)',
+    palette: ['#0A0A0F', '#6C63FF', '#F5F5FF', '#1A1A2E'],
+    liveUrl: 'https://gestor-siem.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/gestor-siem',
+    previewImage: '/projects/gestor-siem.preview.webp',
+    status: 'building',
+  },
+  {
+    name: 'Marfil',
+    category: 'Clínica dental · Salud',
+    tagline: 'Sonríe con total confianza.',
+    stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #EEF5F7 0%, #15B5AE 70%, #0E3A47 100%)',
+    palette: ['#EEF5F7', '#15B5AE', '#0E3A47', '#D7EFEC'],
+    liveUrl: 'https://marfil-dental.vercel.app',
+    repoUrl: 'https://github.com/sogom01/marfil-dental',
+    previewImage: '/projects/marfil-preview.webp',
+  },
+  {
+    name: 'FORJA',
+    category: 'Fitness · Gimnasio',
+    tagline: 'Tu mejor versión se forja aquí.',
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #0B0C0E 0%, #191C21 60%, #CCFF00 100%)',
+    palette: ['#0B0C0E', '#CCFF00', '#191C21', '#F4F6F4'],
+    liveUrl: 'https://forja-gym.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/forja-gym',
+    previewImage: '/projects/forja-gym.preview.webp',
+  },
+  {
+    name: 'Pan y Ricuras',
+    category: 'Carta digital · Panadería',
+    tagline: 'Bienvenido — explora nuestra carta.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #1a0f07 0%, #2e1c0a 50%, #c99e4c 100%)',
+    palette: ['#1a0f07', '#c99e4c', '#f5ead8', '#4a7c59'],
+    liveUrl: 'https://pan-y-ricuras-chipre.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/pan-y-ricuras-chipre',
+    previewImage: '/projects/pan-y-ricuras-preview.webp',
+  },
+  {
+    name: 'Motor Store',
+    category: 'E-commerce · Repuestos',
+    tagline: 'Todo lo que tu moto necesita.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #030000 0%, #9f1239 60%, #e11d48 100%)',
+    palette: ['#030000', '#9f1239', '#e11d48', '#f43f5e'],
+    liveUrl: 'https://motorstore.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/motor-store',
+    previewImage: '/projects/motorstore-preview.webp',
+  },
+  {
+    name: 'AdminInvent',
+    category: 'Gestión empresarial · Inventario',
+    tagline: 'Tu inventario, bajo control real.',
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Zod', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #10b981 100%)',
+    palette: ['#0f172a', '#10b981', '#1e293b', '#d1fae5'],
+    status: 'building',
+  },
+];
+
+/* ── Servicios ──────────────────────────────────────────────── */
+const services = [
   {
     no: '01',
     name: 'Una página',
-    price: '$1.200.000 COP',
-    duration: '1–2 semanas',
-    description: 'Lo esencial para que tu negocio exista en internet.',
-    features: [
-      'Diseño cuidado para móvil y computador',
-      'Formulario con protección anti-spam',
-      'Optimizada para Google',
-    ],
+    price: '$1.200.000',
+    duration: '1–2 sem.',
+    desc: 'Lo esencial para existir en internet. Responsive, rápida y lista para Google.',
   },
   {
     no: '02',
     name: 'Sitio completo',
-    price: '$2.500.000 COP',
-    duration: '2–4 semanas',
-    description: 'Hasta seis páginas con identidad propia.',
-    features: ['Diseño hecho a la medida', 'Blog o casos de éxito', 'Modo claro y modo oscuro'],
-    highlighted: true,
+    price: '$2.500.000',
+    duration: '2–4 sem.',
+    desc: 'Hasta seis páginas con identidad propia, blog y modo claro/oscuro.',
+    highlight: true,
   },
   {
     no: '03',
-    name: 'Sitio + seguridad reforzada',
-    price: '$4.200.000 COP',
-    duration: '4–6 semanas',
-    description: 'Cuando manejas datos sensibles o vas en serio.',
-    features: [
-      'Auditoría de seguridad documentada',
-      'Reporte ejecutivo y técnico',
-      'Acompañamiento post-entrega',
-    ],
+    name: 'Con seguridad reforzada',
+    price: '$4.200.000',
+    duration: '4–6 sem.',
+    desc: 'Auditoría OWASP documentada, reporte ejecutivo y acompañamiento post-entrega.',
   },
-];
+] satisfies {
+  no: string;
+  name: string;
+  price: string;
+  duration: string;
+  desc: string;
+  highlight?: boolean;
+}[];
 
-const stats = [
-  { value: '<1s', label: 'Tiempo de carga' },
-  { value: '100%', label: 'Accesible en móvil' },
-  { value: '24h', label: 'Tiempo de respuesta' },
-  { value: '0', label: 'Costes ocultos' },
+/* ── Principios ─────────────────────────────────────────────── */
+const principles = [
+  { title: 'Seguridad desde el día uno', body: 'Cada formulario, cada cabecera HTTP. Sin atajos.' },
+  { title: 'Rápida o no se entrega', body: 'Una web lenta es una web perdida. Carga en < 1 s.' },
+  {
+    title: 'Todo queda explicado',
+    body: 'Te entrego documentación clara. Sin dependencias eternas.',
+  },
+  { title: 'Honestidad por delante', body: 'Si algo está fuera de mi alcance, te lo digo.' },
 ] as const;
 ---
 
 <BaseLayout title="Inicio">
-  <!-- ============================================================
-       HERO editorial
-       ============================================================ -->
-  <section aria-labelledby="hero-title" class="pt-16 pb-16 sm:pt-24 sm:pb-24">
-    <div class="max-w-4xl">
-      <div class="fade-in-up mb-8 flex items-center gap-3">
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════════════════ -->
+  <section id="inicio" aria-labelledby="hero-title" class="pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="max-w-3xl">
+      <div class="fade-in-up mb-7 flex items-center gap-3">
         <span
           class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"
         ></span>
@@ -95,37 +169,37 @@ const stats = [
 
       <h1
         id="hero-title"
-        class="fade-in-up fade-in-up-delay-1 max-w-3xl text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
+        class="fade-in-up fade-in-up-delay-1 text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
       >
         Desarrollador web.<br />
-        <span class="text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
-          >Construyo sitios que funcionan.</span
-        >
+        <span class="text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Construyo sitios que funcionan.
+        </span>
       </h1>
 
       <p
-        class="fade-in-up fade-in-up-delay-2 mt-8 max-w-lg text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+        class="fade-in-up fade-in-up-delay-2 mt-7 max-w-lg text-lg leading-relaxed text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
       >
-        Soy Juan Sebastián. Diseño y construyo sitios rápidos, seguros y a la medida — el tipo de
-        web del que tus clientes hablan después de cerrar el navegador.
+        Soy Juan Sebastián. Sitios rápidos, seguros y a la medida — el tipo de web del que tus
+        clientes hablan después de cerrar el navegador.
       </p>
 
-      <div class="fade-in-up fade-in-up-delay-3 mt-10 flex flex-wrap gap-3">
+      <div class="fade-in-up fade-in-up-delay-3 mt-9 flex flex-wrap gap-3">
         <a
-          href="/projects"
+          href="#proyectos"
           class="glow-on-hover inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)]"
         >
           Ver proyectos →
         </a>
         <a
-          href="/contact"
-          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] px-7 py-3.5 text-sm font-medium text-[var(--color-fg)] transition-colors hover:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-fg-dark)]"
+          href="#contacto"
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-7 py-3.5 text-sm font-medium transition-colors hover:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-transparent dark:text-[var(--color-fg-dark)]"
         >
           Hablemos
         </a>
       </div>
 
-      <div class="fade-in-up fade-in-up-delay-3 mt-12 flex flex-wrap gap-2">
+      <div class="fade-in-up fade-in-up-delay-3 mt-10 flex flex-wrap gap-2">
         {
           [
             'HTML',
@@ -137,9 +211,9 @@ const stats = [
             'Tailwind',
             'Supabase',
             'Git',
-          ].map((tech) => (
-            <span class="rounded-md border border-[var(--color-border)] px-3 py-1 font-mono text-xs text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:text-[var(--color-muted-dark)]">
-              {tech}
+          ].map((t) => (
+            <span class="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-xs text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-transparent dark:text-[var(--color-muted-dark)]">
+              {t}
             </span>
           ))
         }
@@ -147,93 +221,28 @@ const stats = [
     </div>
   </section>
 
-  <!-- ============================================================
-       STATS editoriales — números grandes
-       ============================================================ -->
+  <!-- ═══════════════════════════════════════════════════════════
+       PROYECTOS
+  ════════════════════════════════════════════════════════════ -->
   <section
-    aria-labelledby="stats-title"
-    class="border-y border-[var(--color-border)] py-10 dark:border-[var(--color-border-dark)]"
-  >
-    <h2 id="stats-title" class="sr-only">Lo que recibes</h2>
-    <div
-      class="flex flex-wrap items-center divide-x divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]"
-    >
-      {
-        stats.map((s, i) => (
-          <div
-            class={`reveal reveal-delay-${Math.min(i, 3)} flex-1 px-6 py-2 first:pl-0 last:pr-0`}
-          >
-            <p class="big-number text-4xl sm:text-5xl">{s.value}</p>
-            <p class="mt-1 text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
-              {s.label}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- ============================================================
-       VALUE PROPS — filas tipo lista editorial
-       ============================================================ -->
-  <section
-    aria-labelledby="value-title"
-    class="border-b border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
+    id="proyectos"
+    aria-labelledby="projects-title"
+    class="border-t border-[var(--color-border)] py-20 dark:border-[var(--color-border-dark)]"
   >
     <div class="reveal mb-12 flex flex-wrap items-end justify-between gap-4">
       <div>
         <p class="mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase">
-          // Por qué trabajar conmigo
+          // 02 — Proyectos
         </p>
-        <h2 id="value-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Lo que recibes <span class="italic-accent">siempre</span>.
-        </h2>
-      </div>
-      <p class="max-w-xs text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-        Sin importar el tamaño del proyecto.
-      </p>
-    </div>
-
-    <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
-      {
-        valueProps.map((v, i) => (
-          <li class={`reveal reveal-delay-${Math.min(i, 3)} flex items-start gap-8 py-8`}>
-            <span class="big-number w-12 shrink-0 text-4xl leading-none tabular-nums">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div class="flex flex-1 flex-wrap items-baseline justify-between gap-4">
-              <h3 class="text-xl font-semibold tracking-tight">{v.title}</h3>
-              <p class="max-w-md text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-                {v.body}
-              </p>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <!-- ============================================================
-       SERVICES PREVIEW — filas editoriales minimalistas
-       ============================================================ -->
-  <section
-    aria-labelledby="services-preview-title"
-    class="border-b border-[var(--color-border)] py-16 sm:py-20 dark:border-[var(--color-border-dark)]"
-  >
-    <div class="reveal mb-12 flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <p class="mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase">
-          // Cómo trabajamos
-        </p>
-        <h2 id="services-preview-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Tres planes <span class="italic-accent">claros y honestos</span>.
+        <h2 id="projects-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Trabajos <span class="italic-accent">reales</span>.
         </h2>
       </div>
       <a
-        href="/services"
+        href="/projects"
         class="group inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)]"
       >
-        Ver todos los detalles
+        Ver todos
         <svg
           class="h-4 w-4 transition-transform group-hover:translate-x-1"
           viewBox="0 0 24 24"
@@ -247,27 +256,256 @@ const stats = [
       </a>
     </div>
 
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((p, i) => (
+          <article
+            class={`reveal reveal-delay-${Math.min(i, 3)} group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] transition-colors hover:border-[var(--color-accent)]/50 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
+          >
+            {(p.liveUrl || p.repoUrl) && (
+              <a
+                href={p.liveUrl ?? p.repoUrl ?? '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visitar ${p.name}`}
+                class="absolute inset-0 z-10"
+              />
+            )}
+
+            {/* Miniatura */}
+            {p.previewImage ? (
+              <div class="relative h-40 overflow-hidden">
+                <img
+                  src={p.previewImage}
+                  alt={`Vista previa de ${p.name}`}
+                  class="h-full w-full object-cover object-top [filter:grayscale(1)_brightness(0.7)] transition-all duration-700 group-hover:scale-105 group-hover:[filter:grayscale(0)_brightness(0.95)]"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/30">
+                  <span class="flex translate-y-2 items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-900 opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    Ver proyecto ↗
+                  </span>
+                </div>
+                {p.status === 'building' && (
+                  <div class="absolute top-2.5 left-2.5">
+                    <span class="inline-flex rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-2.5 py-0.5 text-[10px] font-semibold text-white uppercase shadow-sm backdrop-blur-sm">
+                      En desarrollo
+                    </span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div
+                class="relative h-40 overflow-hidden"
+                style={`background:${p.imageGradient}`}
+                aria-hidden="true"
+              >
+                <div class="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/20">
+                  <span class="flex translate-y-2 items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-900 opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    Próximamente
+                  </span>
+                </div>
+                <div class="absolute right-3 bottom-3 flex gap-1.5">
+                  {p.palette.map((c) => (
+                    <span
+                      class="h-4 w-4 rounded-full border border-white/40"
+                      style={`background:${c}`}
+                    />
+                  ))}
+                </div>
+                {p.status === 'building' && (
+                  <div class="absolute top-2.5 left-2.5">
+                    <span class="inline-flex rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-2.5 py-0.5 text-[10px] font-semibold text-white uppercase shadow-sm">
+                      En desarrollo
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Info */}
+            <div class="p-5">
+              <p class="font-mono text-[10px] tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
+                {p.category}
+              </p>
+              <h3 class="mt-1.5 text-base font-semibold tracking-tight">{p.name}</h3>
+              <p class="mt-1 font-serif text-xs text-[var(--color-accent)] italic">"{p.tagline}"</p>
+
+              <div class="relative z-20 mt-4 flex items-center justify-between">
+                <ul class="flex flex-wrap gap-1.5">
+                  {p.stack.slice(0, 4).map((s) => {
+                    const tech = techIconMap.get(s);
+                    const src = tech
+                      ? `https://cdn.simpleicons.org/${tech.slug}${tech.color ? '/' + tech.color : ''}`
+                      : undefined;
+                    return (
+                      <li title={s}>
+                        {src ? (
+                          <img
+                            src={src}
+                            alt={s}
+                            width="16"
+                            height="16"
+                            class:list={['h-4 w-4 shrink-0', { 'dark:invert': tech?.invertDark }]}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span class="font-mono text-[10px] text-[var(--color-accent)]">
+                            {s.charAt(0)}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+                {p.repoUrl && (
+                  <a
+                    href={p.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Código de ${p.name} en GitHub`}
+                    class="relative z-20 text-[var(--color-muted)] transition-colors hover:text-[var(--color-fg)] dark:text-[var(--color-muted-dark)]"
+                  >
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
+                      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SOBRE MÍ
+  ════════════════════════════════════════════════════════════ -->
+  <section
+    id="sobre-mi"
+    aria-labelledby="about-title"
+    class="border-t border-[var(--color-border)] py-20 dark:border-[var(--color-border-dark)]"
+  >
+    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_380px] lg:gap-16">
+      <div>
+        <p
+          class="reveal mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase"
+        >
+          // 01 — Sobre mí
+        </p>
+        <h2 id="about-title" class="reveal text-3xl font-semibold tracking-tight sm:text-4xl">
+          Trabajo con la <span class="italic-accent">cabeza fría</span><br />y ojo de quien estudia
+          seguridad.
+        </h2>
+
+        <div
+          class="reveal reveal-delay-1 mt-8 space-y-5 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+        >
+          <p>
+            Me llamo <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+              >Juan Sebastián Osorio</strong
+            >, colombiano. Mi día se reparte entre construir páginas web y estudiar cómo se rompen
+            las que no están bien hechas — esa mezcla define mi forma de trabajar.
+          </p>
+          <p>
+            Estoy al inicio de mi camino freelance: precios accesibles y una atención al detalle que
+            no encuentras en agencias con quince clientes a la vez. Aquí tú no eres un número.
+          </p>
+        </div>
+
+        <ul class="reveal reveal-delay-2 mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {
+            principles.map((p, i) => (
+              <li class="flex gap-4">
+                <span
+                  class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-2)] text-xs font-semibold text-white"
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 class="text-sm font-semibold">{p.title}</h3>
+                  <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                    {p.body}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Foto -->
+      <div class="reveal relative lg:sticky lg:top-24">
+        <div
+          class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-border-dark)]"
+        >
+          <img
+            src="/juan-sebastian.webp"
+            alt="Juan Sebastián Osorio, desarrollador web"
+            width="800"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div
+          aria-hidden="true"
+          class="absolute -right-2 -bottom-2 -z-10 hidden h-full w-full rounded-2xl border border-[var(--color-accent)]/25 lg:block"
+        >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SERVICIOS
+  ════════════════════════════════════════════════════════════ -->
+  <section
+    id="servicios"
+    aria-labelledby="services-title"
+    class="border-t border-[var(--color-border)] py-20 dark:border-[var(--color-border-dark)]"
+  >
+    <div class="reveal mb-12 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase">
+          // 03 — Servicios
+        </p>
+        <h2 id="services-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Tres planes <span class="italic-accent">claros y honestos</span>.
+        </h2>
+      </div>
+      <p class="max-w-xs text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+        Sin costes ocultos. Precio final acordado antes de empezar.
+      </p>
+    </div>
+
     <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
       {
-        servicesPreview.map((s, i) => (
+        services.map((s, i) => (
           <li
-            class={`reveal reveal-delay-${Math.min(i, 3)} group flex flex-wrap items-center gap-6 py-8`}
+            class={`reveal reveal-delay-${Math.min(i, 3)} flex flex-wrap items-center gap-6 py-8`}
           >
-            <span class="big-number w-12 shrink-0 text-4xl leading-none tabular-nums">{s.no}</span>
-            <div class="flex flex-1 flex-wrap items-baseline gap-x-6 gap-y-1">
-              <h3 class="text-xl font-semibold tracking-tight">{s.name}</h3>
+            <span class="big-number w-10 shrink-0 text-4xl leading-none tabular-nums">{s.no}</span>
+            <div class="flex flex-1 flex-wrap items-baseline gap-x-5 gap-y-1">
+              <h3 class="text-lg font-semibold tracking-tight">{s.name}</h3>
               <p class="text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-                {s.description}
+                {s.desc}
               </p>
             </div>
-            <div class="flex items-center gap-6 text-right">
+            <div class="flex items-center gap-4 text-right">
               <div>
-                <p class="italic-accent text-xl">{s.price}</p>
+                <p class="italic-accent text-xl">
+                  {s.price}{' '}
+                  <span class="font-sans text-xs text-[var(--color-muted)] not-italic">COP</span>
+                </p>
                 <p class="mt-0.5 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
                   {s.duration}
                 </p>
               </div>
-              {s.highlighted && (
+              {s.highlight && (
                 <span class="rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-2)] px-3 py-0.5 text-[10px] font-semibold tracking-wider text-white uppercase">
                   Popular
                 </span>
@@ -279,42 +517,240 @@ const stats = [
     </ul>
   </section>
 
-  <!-- ============================================================
-       FINAL CTA editorial
-       ============================================================ -->
-  <section class="py-16 sm:py-20">
-    <div
-      class="reveal relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-2)] p-10 text-white sm:p-16"
-    >
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]"
-        aria-hidden="true"
-      >
-      </div>
-      <div class="relative max-w-2xl">
-        <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-          Cuéntame tu <em class="font-serif font-medium italic">idea</em>.
-        </h2>
-        <p class="mt-4 text-lg text-white/90">
-          Te respondo en menos de 24 horas con una propuesta clara y sin compromiso.
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTACTO
+  ════════════════════════════════════════════════════════════ -->
+  <section
+    id="contacto"
+    aria-labelledby="contact-title"
+    class="border-t border-[var(--color-border)] py-20 dark:border-[var(--color-border-dark)]"
+  >
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+      <!-- Left: copy -->
+      <div class="reveal">
+        <p class="mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase">
+          // 04 — Contacto
         </p>
-        <a
-          href="/contact"
-          class="mt-8 inline-flex items-center justify-center rounded-md bg-white px-7 py-3.5 text-sm font-semibold text-[var(--color-accent)] shadow-lg transition-transform hover:scale-105"
-        >
-          Empezar conversación
-          <svg
-            class="ml-2 h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
+        <h2 id="contact-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Hablemos de <span class="italic-accent">tu proyecto</span>.
+        </h2>
+        <p class="mt-5 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+          Cuéntame en qué estás trabajando. Respondo en menos de 48 horas.
+        </p>
+
+        <dl class="mt-10 space-y-5 text-sm">
+          <div class="flex items-center gap-3">
+            <dt
+              class="font-mono text-[10px] tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
+            >
+              Email
+            </dt>
+            <dd>
+              <a
+                href="mailto:jsogfd@gmail.com"
+                class="text-[var(--color-fg)] transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-fg-dark)]"
+                >jsogfd@gmail.com</a
+              >
+            </dd>
+          </div>
+          <div class="flex items-center gap-3">
+            <dt
+              class="font-mono text-[10px] tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
+            >
+              GitHub
+            </dt>
+            <dd>
+              <a
+                href="https://github.com/sogom01"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[var(--color-fg)] transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-fg-dark)]"
+                >github.com/sogom01</a
+              >
+            </dd>
+          </div>
+          <div class="flex items-center gap-3">
+            <dt
+              class="font-mono text-[10px] tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
+            >
+              Ubicación
+            </dt>
+            <dd class="text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              Colombia · Trabajo remoto
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Right: formulario -->
+      <div class="reveal reveal-delay-1">
+        <noscript>
+          <p
+            class="mb-6 rounded-md border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"
+            role="alert"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"></path>
-          </svg>
-        </a>
+            Este formulario requiere JavaScript para la verificación anti-bot. Por favor, actívalo o
+            escríbeme directamente al correo.
+          </p>
+        </noscript>
+
+        <form
+          id="contact-form"
+          action="/api/contact"
+          method="POST"
+          novalidate
+          class="grid gap-5"
+          aria-describedby="form-help"
+        >
+          <p id="form-help" class="sr-only">Todos los campos marcados son obligatorios.</p>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="name" class="block text-sm font-medium"
+                >Nombre <span aria-hidden="true" class="text-[var(--color-accent)]">*</span></label
+              >
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                minlength="2"
+                maxlength="80"
+                aria-required="true"
+                aria-describedby="name-error"
+                class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+              />
+              <p id="name-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium"
+                >Correo <span aria-hidden="true" class="text-[var(--color-accent)]">*</span></label
+              >
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                maxlength="200"
+                aria-required="true"
+                aria-describedby="email-error"
+                class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+              />
+              <p id="email-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
+            </div>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium"
+              >Mensaje <span aria-hidden="true" class="text-[var(--color-accent)]">*</span></label
+            >
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              minlength="10"
+              maxlength="2000"
+              aria-required="true"
+              aria-describedby="message-error message-hint"
+              class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+            ></textarea>
+            <p
+              id="message-hint"
+              class="mt-1 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+            >
+              Entre 10 y 2000 caracteres.
+            </p>
+            <p id="message-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
+          </div>
+
+          <!-- Honeypot -->
+          <div
+            aria-hidden="true"
+            style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
+          >
+            <label for="website">No rellenar</label>
+            <input id="website" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="auto"
+            data-size="flexible"
+          >
+          </div>
+
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <button
+              id="submit-btn"
+              type="submit"
+              class="glow-on-hover inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-accent-hover)] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Enviar mensaje
+            </button>
+            <p id="form-status" role="status" aria-live="polite" tabindex="-1" class="text-sm"></p>
+          </div>
+        </form>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+    if (!form || !status || !submitBtn) return;
+
+    const setStatus = (msg, kind) => {
+      status.textContent = msg;
+      status.className =
+        'text-sm ' +
+        (kind === 'success'
+          ? 'text-green-600 dark:text-green-400'
+          : kind === 'error'
+            ? 'text-red-600 dark:text-red-400'
+            : 'text-[var(--color-muted)]');
+      if (msg) status.focus();
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const payload = {
+        name: String(data.get('name') || '').trim(),
+        email: String(data.get('email') || '').trim(),
+        message: String(data.get('message') || '').trim(),
+        honeypot: String(data.get('honeypot') || ''),
+        turnstileToken: String(data.get('cf-turnstile-response') || ''),
+      };
+      submitBtn.disabled = true;
+      setStatus('Enviando…', 'info');
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.ok) {
+          form.reset();
+          if (window.turnstile) window.turnstile.reset();
+          setStatus('Mensaje enviado. Te responderé pronto. ¡Gracias!', 'success');
+        } else {
+          setStatus(json.error || 'No se pudo enviar el mensaje.', 'error');
+        }
+      } catch {
+        setStatus('Error de red. Inténtalo de nuevo.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  })();
+</script>
