@@ -52,10 +52,10 @@ interface Concept {
 const concepts: readonly Concept[] = [
       {
     name: 'SIEMLogs',
-    category: 'Sistema de monitoreo y control de logs',
-    tagline: 'Trabajamos en la gestión de incidentes.',
-     description:
-      'Sitio de practica para probar concciminetos en desarrollo fullstack, aplicando conceptos de diseño y estructura empresarial',
+    category: 'Ciberseguridad · Monitoreo de eventos',
+    tagline: 'Visibilidad total sobre tus incidentes.',
+    description:
+      'Dashboard de práctica para simular un SIEM empresarial: centraliza logs, clasifica eventos por severidad y muestra el estado de incidentes en tiempo real. Construido para explorar arquitecturas fullstack con diseño y estructura de nivel corporativo.',
     palette: ['#0A0A0F', '#6C63FF', '#F5F5FF', '#1A1A2E'],
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 50%, #6C63FF 100%)',
@@ -69,7 +69,7 @@ const concepts: readonly Concept[] = [
     category: 'Estudio creativo · Marketing',
     tagline: 'Marcas que la gente recuerda.',
     description:
-      'Landing para estudio de marketing que presenta servicios, casos de éxito y filosofía de marca. El visitante entiende en segundos qué hace el estudio, ve ejemplos reales de trabajo y encuentra un camino claro para contactar.',
+      'Landing para estudio de marketing que comunica servicios, casos de éxito y filosofía de marca en un solo scroll. El visitante entiende en segundos qué hace el estudio, ve evidencia real del trabajo y encuentra un camino directo para iniciar una conversación.',
     palette: ['#F2F0EA', '#2A2BF5', '#14130F', '#FBFAF6'],
     stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     imageGradient: 'linear-gradient(135deg, #F2F0EA 0%, #2A2BF5 60%, #14130F 100%)',
@@ -82,7 +82,7 @@ const concepts: readonly Concept[] = [
     category: 'Café de origen · Sabor, Tradición y Origen',
     tagline: 'Donde la montaña se vuelve tinto.',
     description:
-      'Landing para café de especialidad en Pereira que comunica origen, proceso y variedad de producto. El visitante descubre la historia detrás del grano, los métodos de preparación disponibles y cómo llegar o hacer un pedido.',
+      'Landing para café de especialidad en Pereira que conecta al visitante con el origen del grano: la historia del cultivo, los métodos de preparación y la variedad del catálogo. Incluye sección de ubicación y llamada de acción clara para hacer un pedido o visitar el local.',
     palette: ['#F3EAD9', '#B85C38', '#2A1E16', '#E7A879'],
     stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     imageGradient: 'linear-gradient(135deg, #F3EAD9 0%, #B85C38 50%, #2A1E16 100%)',
@@ -95,7 +95,7 @@ const concepts: readonly Concept[] = [
     category: 'Clínica dental · Salud',
     tagline: 'Sonríe con total confianza.',
     description:
-      'Landing para clínica dental que muestra servicios, credenciales del equipo y preguntas frecuentes. Incluye formulario de agendamiento integrado con Supabase para que los pacientes soliciten cita sin necesidad de llamar.',
+      'Landing para clínica dental que transmite confianza desde el primer scroll: servicios detallados, credenciales del equipo y preguntas frecuentes respondidas. El formulario de agendamiento conectado a Supabase permite solicitar cita en línea sin necesidad de llamar.',
     palette: ['#EEF5F7', '#15B5AE', '#0E3A47', '#D7EFEC'],
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #EEF5F7 0%, #15B5AE 70%, #0E3A47 100%)',
@@ -108,7 +108,7 @@ const concepts: readonly Concept[] = [
     category: 'Centro de entrenamiento · Fitness',
     tagline: 'Tu mejor versión se forja aquí.',
     description:
-      'Landing para gimnasio funcional que presenta planes de membresía, clases disponibles y testimonios de miembros. El objetivo es convertir visitantes en inscritos mostrando resultados concretos y reduciendo la fricción para dar el primer paso.',
+      'Landing para gimnasio funcional diseñada para convertir. Presenta planes de membresía, clases disponibles y testimonios reales de miembros. Cada sección empuja al visitante hacia un único objetivo: dar el primer paso y registrarse sin excusas.',
     palette: ['#0B0C0E', '#CCFF00', '#191C21', '#F4F6F4'],
     stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     imageGradient: 'linear-gradient(135deg, #0B0C0E 0%, #191C21 60%, #CCFF00 100%)',
@@ -121,7 +121,7 @@ const concepts: readonly Concept[] = [
     category: 'Carta digital · Panadería',
     tagline: 'Bienvenido — explora nuestra carta.',
     description:
-      'Carta digital para panadería donde los clientes consultan el menú completo, buscan por nombre y filtran por categoría en tiempo real. El administrador gestiona productos desde un panel protegido: agrega, edita, marca agotados y elimina sin tocar código.',
+      'Carta digital para panadería con búsqueda y filtrado por categoría en tiempo real. El cliente consulta el menú desde su celular sin instalar nada. El administrador gestiona el catálogo desde un panel protegido: agrega, edita, marca agotados y elimina productos sin tocar una línea de código.',
     palette: ['#1a0f07', '#c99e4c', '#f5ead8', '#4a7c59'],
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #1a0f07 0%, #2e1c0a 50%, #c99e4c 100%)',
@@ -134,7 +134,7 @@ const concepts: readonly Concept[] = [
     category: 'E-commerce · Repuestos de moto',
     tagline: 'Todo lo que tu moto necesita, en un solo lugar.',
     description:
-      'Tienda online de repuestos y accesorios para moto. El usuario navega el catálogo, filtra por categoría y precio, ve el detalle de cada producto y gestiona su carrito sin perder el progreso al recargar. Alertas de stock bajo para urgir la compra.',
+      'Tienda online de repuestos y accesorios para moto. El usuario navega el catálogo, filtra por categoría y precio, revisa el detalle de cada producto y gestiona su carrito — que persiste entre recargas. Alertas de stock bajo para crear urgencia y reducir el abandono.',
     palette: ['#030000', '#9f1239', '#e11d48', '#f43f5e'],
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #030000 0%, #9f1239 60%, #e11d48 100%)',
@@ -142,12 +142,23 @@ const concepts: readonly Concept[] = [
     repoUrl: 'https://github.com/sogom01/motor-store',
     previewImage: '/projects/motorstore-preview.webp',
   },
+  {
+    name: 'AdminInvent',
+    category: 'Gestión empresarial · Inventario',
+    tagline: 'Tu inventario, bajo control real.',
+    description:
+      'App web de gestión de inventario con roles diferenciados (admin, gestor y visor). Permite registrar productos, registrar entradas y salidas de stock, y consultar el historial de movimientos desde un dashboard limpio. Autenticación segura con Auth.js, datos persistidos en PostgreSQL vía Prisma y validaciones compartidas con Zod en front y back.',
+    palette: ['#0f172a', '#10b981', '#1e293b', '#d1fae5'],
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Zod', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #10b981 100%)',
+    status: 'building',
+  },
    {
     name: 'Teclook',
     category: 'Agencia · Marketing & Software',
     tagline: 'Tecnología con mirada estratégica.',
-     description:
-      'Sitio corporativo para Teclook donde los clientes potenciales descubren los servicios de marketing y desarrollo, ven casos de éxito y contactan al equipo directamente. Diseñado para generar confianza desde la primera visita y convertir interés en conversación.',
+    description:
+      'Sitio corporativo para Teclook donde los clientes potenciales descubren los servicios de marketing y desarrollo de software, exploran casos de éxito y contactan al equipo directamente. Cada sección está pensada para generar confianza rápido y convertir una visita en una conversación real.',
     palette: ['#0A0A0F', '#6C63FF', '#F5F5FF', '#1A1A2E'],
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     imageGradient: 'linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 50%, #6C63FF 100%)',
@@ -172,6 +183,8 @@ const techIconMap = new Map<string, TechIcon>([
   ['Next.js', { slug: 'nextdotjs', invertDark: true }],
   ['HTML', { slug: 'html5', color: 'E34F26' }],
   ['JavaScript', { slug: 'javascript', color: 'F7DF1E' }],
+  ['Prisma', { slug: 'prisma', invertDark: true }],
+  ['PostgreSQL', { slug: 'postgresql', color: '4169E1' }],
 ]);
 
 // Etiquetas dinámicas por status
