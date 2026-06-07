@@ -259,33 +259,27 @@ const marqueeItems: MarqueeItem[] = [
         </div>
       </div>
 
-      <!-- Columna derecha: mini-carta de servicios (solo desktop) -->
+      <!-- Columna derecha: propuesta de valor (solo desktop) -->
       <div class="fade-in-up fade-in-up-delay-3 hidden lg:block">
         <div
           class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
         >
           <p class="mb-5 font-mono text-[11px] tracking-wider text-[var(--color-accent)] uppercase">
-            // Servicios
+            // Lo que incluye
           </p>
-          <ul
-            class="space-y-0 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]"
-          >
+          <ul class="space-y-3.5">
             {
-              services.map((s) => (
-                <li class="flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                  <span class="text-sm text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
-                    {s.name}
+              [
+                { icon: '⚡', text: 'Entrega en 1–4 semanas' },
+                { icon: '🔒', text: 'Seguridad OWASP incluida' },
+                { icon: '📱', text: '100% responsive' },
+                { icon: '💬', text: 'Soporte post-entrega' },
+              ].map((item) => (
+                <li class="flex items-center gap-3 text-sm text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+                  <span class="text-base leading-none" aria-hidden="true">
+                    {item.icon}
                   </span>
-                  <span
-                    class:list={[
-                      'shrink-0 text-sm font-semibold tabular-nums',
-                      s.highlight
-                        ? 'italic-accent'
-                        : 'text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]',
-                    ]}
-                  >
-                    {s.price}
-                  </span>
+                  {item.text}
                 </li>
               ))
             }
@@ -294,7 +288,7 @@ const marqueeItems: MarqueeItem[] = [
             href="#servicios"
             class="mt-5 block text-right font-mono text-[11px] tracking-wider text-[var(--color-muted)] uppercase transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-muted-dark)]"
           >
-            Ver planes →
+            Ver servicios →
           </a>
         </div>
       </div>
@@ -332,7 +326,7 @@ const marqueeItems: MarqueeItem[] = [
     </div>
 
     <!-- Scroll indicator -->
-    <div class="relative z-10 flex justify-center py-5" aria-hidden="true">
+    <div class="relative z-10 flex justify-center py-2" aria-hidden="true">
       <a
         href="#proyectos"
         class="bounce-chevron text-[var(--color-muted)]/50 dark:text-[var(--color-muted-dark)]/50"
