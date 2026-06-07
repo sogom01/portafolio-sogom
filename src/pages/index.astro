@@ -208,7 +208,7 @@ const marqueeItems: MarqueeItem[] = [
     class="hero-grid relative flex min-h-[calc(100svh-3.5rem)] flex-col pt-10 sm:pt-14"
   >
     <div
-      class="relative z-10 grid flex-1 grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_260px] lg:gap-14"
+      class="relative z-10 grid grid-cols-1 items-start gap-10 pb-10 lg:grid-cols-[1fr_260px] lg:gap-14"
     >
       <!-- Columna izquierda: texto principal -->
       <div>
@@ -299,6 +299,9 @@ const marqueeItems: MarqueeItem[] = [
         </div>
       </div>
     </div>
+
+    <!-- Espaciador flexible: empuja marquee y chevron al fondo -->
+    <div class="flex-1" aria-hidden="true"></div>
 
     <!-- Marquee de tecnologías -->
     <div
