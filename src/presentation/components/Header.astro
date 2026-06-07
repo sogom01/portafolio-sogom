@@ -135,7 +135,9 @@ const navItems = [
       const isDark = root.classList.toggle('dark');
       try {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      } catch {}
+      } catch {
+        /* localStorage puede fallar en modo privado */
+      }
       sync();
     });
   })();
