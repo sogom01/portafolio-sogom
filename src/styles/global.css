@@ -5,18 +5,22 @@
 
 /* Design tokens — paleta sunset, minimalista. */
 @theme {
-  --color-bg: #ffffff;
-  --color-fg: #0a0a0a;
-  --color-muted: #525252;
+  /* Tema claro — base cálida para que los bordes y tarjetas se lean bien */
+  --color-bg: #f8f7f4;
+  --color-fg: #111110;
+  --color-muted: #62615e;
   --color-accent: #dc2626;
   --color-accent-hover: #b91c1c;
   --color-accent-2: #f97316;
-  --color-border: #e5e5e5;
+  --color-border: #cccbc7;
+  --color-surface: #eeecea; /* fondo de tarjetas, inputs, paneles */
 
+  /* Tema oscuro — sin cambios */
   --color-bg-dark: #0a0a0a;
   --color-fg-dark: #fafafa;
   --color-muted-dark: #a3a3a3;
   --color-border-dark: #262626;
+  --color-surface-dark: #141414;
 
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
@@ -220,6 +224,60 @@ body::after {
   }
 }
 
+/* ── Grid sutil detrás del hero ─────────────────────────────── */
+.hero-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 52px 52px;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, #000 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, #000 10%, transparent 75%);
+}
+.dark .hero-grid::before {
+  opacity: 0.25;
+  background-image:
+    linear-gradient(var(--color-border-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-dark) 1px, transparent 1px);
+}
+
+/* ── Marquee ─────────────────────────────────────────────────── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Scroll chevron bounce ───────────────────────────────────── */
+@keyframes bounce-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+.bounce-chevron {
+  animation: bounce-y 1.6s ease-in-out infinite;
+}
+
 /* Respeta reduce-motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -233,5 +291,11 @@ body::after {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .bounce-chevron {
+    animation: none;
   }
 }
