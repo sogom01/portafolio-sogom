@@ -224,6 +224,60 @@ body::after {
   }
 }
 
+/* ── Grid sutil detrás del hero ─────────────────────────────── */
+.hero-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 52px 52px;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, #000 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, #000 10%, transparent 75%);
+}
+.dark .hero-grid::before {
+  opacity: 0.25;
+  background-image:
+    linear-gradient(var(--color-border-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-dark) 1px, transparent 1px);
+}
+
+/* ── Marquee ─────────────────────────────────────────────────── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Scroll chevron bounce ───────────────────────────────────── */
+@keyframes bounce-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+.bounce-chevron {
+  animation: bounce-y 1.6s ease-in-out infinite;
+}
+
 /* Respeta reduce-motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -237,5 +291,11 @@ body::after {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .bounce-chevron {
+    animation: none;
   }
 }

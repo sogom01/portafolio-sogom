@@ -5,7 +5,7 @@ import BaseLayout from '../presentation/layouts/BaseLayout.astro';
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
-/* ── Proyectos ─────────────────────────────────────────────── */
+/* ── Iconos de tecnología ───────────────────────────────────── */
 type TechIcon = { slug: string; color?: string; invertDark?: boolean };
 const techIconMap = new Map<string, TechIcon>([
   ['Astro', { slug: 'astro', color: 'FF5D01' }],
@@ -24,6 +24,7 @@ const techIconMap = new Map<string, TechIcon>([
   ['Resend', { slug: 'resend', invertDark: true }],
 ]);
 
+/* ── Proyectos ──────────────────────────────────────────────── */
 interface Project {
   name: string;
   category: string;
@@ -43,7 +44,7 @@ const projects: readonly Project[] = [
     category: 'Ciberseguridad · Monitoreo',
     tagline: 'Visibilidad total sobre tus incidentes.',
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 50%, #6C63FF 100%)',
+    imageGradient: 'linear-gradient(135deg,#0A0A0F 0%,#1A1A2E 50%,#6C63FF 100%)',
     palette: ['#0A0A0F', '#6C63FF', '#F5F5FF', '#1A1A2E'],
     liveUrl: 'https://gestor-siem.vercel.app/',
     repoUrl: 'https://github.com/sogom01/gestor-siem',
@@ -51,11 +52,33 @@ const projects: readonly Project[] = [
     status: 'building',
   },
   {
+    name: 'Pulso',
+    category: 'Estudio creativo · Marketing',
+    tagline: 'Marcas que la gente recuerda.',
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    imageGradient: 'linear-gradient(135deg,#F2F0EA 0%,#2A2BF5 60%,#14130F 100%)',
+    palette: ['#F2F0EA', '#2A2BF5', '#14130F', '#FBFAF6'],
+    liveUrl: 'https://marketing-agency-pulso.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/Marketing-Agency',
+    previewImage: '/projects/marketing-agency-pulso.preview.webp',
+  },
+  {
+    name: 'Café Señor Martin',
+    category: 'Café de origen · Gastronomía',
+    tagline: 'Donde la montaña se vuelve tinto.',
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    imageGradient: 'linear-gradient(135deg,#F3EAD9 0%,#B85C38 50%,#2A1E16 100%)',
+    palette: ['#F3EAD9', '#B85C38', '#2A1E16', '#E7A879'],
+    liveUrl: 'https://cafe-senor-martin.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/cafe-san-martin',
+    previewImage: '/projects/señor-martin.preview.webp',
+  },
+  {
     name: 'Marfil',
     category: 'Clínica dental · Salud',
     tagline: 'Sonríe con total confianza.',
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #EEF5F7 0%, #15B5AE 70%, #0E3A47 100%)',
+    imageGradient: 'linear-gradient(135deg,#EEF5F7 0%,#15B5AE 70%,#0E3A47 100%)',
     palette: ['#EEF5F7', '#15B5AE', '#0E3A47', '#D7EFEC'],
     liveUrl: 'https://marfil-dental.vercel.app',
     repoUrl: 'https://github.com/sogom01/marfil-dental',
@@ -65,8 +88,8 @@ const projects: readonly Project[] = [
     name: 'FORJA',
     category: 'Fitness · Gimnasio',
     tagline: 'Tu mejor versión se forja aquí.',
-    stack: ['HTML', 'Tailwind CSS', 'JavaScript', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #0B0C0E 0%, #191C21 60%, #CCFF00 100%)',
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    imageGradient: 'linear-gradient(135deg,#0B0C0E 0%,#191C21 60%,#CCFF00 100%)',
     palette: ['#0B0C0E', '#CCFF00', '#191C21', '#F4F6F4'],
     liveUrl: 'https://forja-gym.vercel.app/',
     repoUrl: 'https://github.com/sogom01/forja-gym',
@@ -77,7 +100,7 @@ const projects: readonly Project[] = [
     category: 'Carta digital · Panadería',
     tagline: 'Bienvenido — explora nuestra carta.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #1a0f07 0%, #2e1c0a 50%, #c99e4c 100%)',
+    imageGradient: 'linear-gradient(135deg,#1a0f07 0%,#2e1c0a 50%,#c99e4c 100%)',
     palette: ['#1a0f07', '#c99e4c', '#f5ead8', '#4a7c59'],
     liveUrl: 'https://pan-y-ricuras-chipre.vercel.app/',
     repoUrl: 'https://github.com/sogom01/pan-y-ricuras-chipre',
@@ -85,22 +108,25 @@ const projects: readonly Project[] = [
   },
   {
     name: 'Motor Store',
-    category: 'E-commerce · Repuestos',
+    category: 'E-commerce · Repuestos de moto',
     tagline: 'Todo lo que tu moto necesita.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Zod', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #030000 0%, #9f1239 60%, #e11d48 100%)',
+    imageGradient: 'linear-gradient(135deg,#030000 0%,#9f1239 60%,#e11d48 100%)',
     palette: ['#030000', '#9f1239', '#e11d48', '#f43f5e'],
     liveUrl: 'https://motorstore.vercel.app/',
     repoUrl: 'https://github.com/sogom01/motor-store',
     previewImage: '/projects/motorstore-preview.webp',
   },
   {
-    name: 'AdminInvent',
-    category: 'Gestión empresarial · Inventario',
-    tagline: 'Tu inventario, bajo control real.',
-    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Zod', 'Vercel'],
-    imageGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #10b981 100%)',
-    palette: ['#0f172a', '#10b981', '#1e293b', '#d1fae5'],
+    name: 'Teclook',
+    category: 'Agencia · Marketing & Software',
+    tagline: 'Tecnología con mirada estratégica.',
+    stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    imageGradient: 'linear-gradient(135deg,#0A0A0F 0%,#1A1A2E 50%,#6C63FF 100%)',
+    palette: ['#0A0A0F', '#6C63FF', '#F5F5FF', '#1A1A2E'],
+    liveUrl: 'https://teclook.vercel.app/',
+    repoUrl: 'https://github.com/sogom01/teclook',
+    previewImage: '/projects/tecklook.preview.webp',
     status: 'building',
   },
 ];
@@ -148,20 +174,44 @@ const principles = [
   },
   { title: 'Honestidad por delante', body: 'Si algo está fuera de mi alcance, te lo digo.' },
 ] as const;
+
+/* ── Marquee de tecnologías ─────────────────────────────────── */
+const marqueeItems = [
+  'HTML · CSS',
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'Astro',
+  'Next.js',
+  'Tailwind CSS',
+  'Supabase',
+  'PostgreSQL',
+  'Git',
+  'Vercel',
+  'OWASP',
+  'Accesibilidad',
+  'Node.js',
+  'Zod',
+  'Prisma',
+  'Cloudflare',
+];
 ---
 
 <BaseLayout title="Inicio">
   <!-- ═══════════════════════════════════════════════════════════
-       HERO
+       HERO — con grid de fondo y scroll indicator
   ════════════════════════════════════════════════════════════ -->
-  <section id="inicio" aria-labelledby="hero-title" class="pt-16 pb-20 sm:pt-24 sm:pb-28">
-    <div class="max-w-3xl">
-      <div class="fade-in-up mb-7 flex items-center gap-3">
+  <section id="inicio" aria-labelledby="hero-title" class="hero-grid relative pt-16 pb-0 sm:pt-24">
+    <div class="relative z-10 max-w-3xl pb-16 sm:pb-24">
+      <!-- Badge de disponibilidad mejorado -->
+      <div
+        class="fade-in-up mb-8 inline-flex items-center gap-2.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-1.5 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+      >
         <span
-          class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"
-        ></span>
+          class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent)]"
+          style="animation:pulse-dot 2s infinite"></span>
         <span
-          class="font-mono text-xs tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
+          class="font-mono text-[11px] font-medium tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]"
         >
           Disponible para nuevos proyectos
         </span>
@@ -193,36 +243,50 @@ const principles = [
         </a>
         <a
           href="#contacto"
-          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-7 py-3.5 text-sm font-medium transition-colors hover:border-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-transparent dark:text-[var(--color-fg-dark)]"
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-7 py-3.5 text-sm font-medium text-[var(--color-fg)] transition-colors hover:border-[var(--color-accent)]/60 hover:bg-[var(--color-surface)] dark:border-[var(--color-border-dark)] dark:bg-transparent dark:text-[var(--color-fg-dark)]"
         >
           Hablemos
         </a>
       </div>
+    </div>
 
-      <div class="fade-in-up fade-in-up-delay-3 mt-10 flex flex-wrap gap-2">
+    <!-- Marquee de tecnologías -->
+    <div
+      class="fade-in-up fade-in-up-delay-3 relative z-10 overflow-hidden border-y border-[var(--color-border)] py-3 dark:border-[var(--color-border-dark)]"
+      aria-hidden="true"
+    >
+      <div class="marquee-track">
         {
-          [
-            'HTML',
-            'CSS',
-            'JavaScript',
-            'TypeScript',
-            'Astro',
-            'Next.js',
-            'Tailwind',
-            'Supabase',
-            'Git',
-          ].map((t) => (
-            <span class="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-xs text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)] dark:border-[var(--color-border-dark)] dark:bg-transparent dark:text-[var(--color-muted-dark)]">
-              {t}
+          [...marqueeItems, ...marqueeItems].map((item) => (
+            <span class="mx-6 font-mono text-xs whitespace-nowrap text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {item}
             </span>
           ))
         }
       </div>
     </div>
+
+    <!-- Scroll indicator -->
+    <div class="relative z-10 flex justify-center py-5" aria-hidden="true">
+      <a
+        href="#proyectos"
+        class="bounce-chevron text-[var(--color-muted)]/50 dark:text-[var(--color-muted-dark)]/50"
+      >
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"></path>
+        </svg>
+      </a>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       PROYECTOS
+       PROYECTOS — grid 3 col con grayscale hover
   ════════════════════════════════════════════════════════════ -->
   <section
     id="proyectos"
@@ -260,8 +324,9 @@ const principles = [
       {
         projects.map((p, i) => (
           <article
-            class={`reveal reveal-delay-${Math.min(i, 3)} group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] transition-colors hover:border-[var(--color-accent)]/50 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
+            class={`reveal reveal-delay-${Math.min(i, 3)} group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/50 hover:shadow-[var(--color-accent)]/5 hover:shadow-lg dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]`}
           >
+            {/* Stretched link */}
             {(p.liveUrl || p.repoUrl) && (
               <a
                 href={p.liveUrl ?? p.repoUrl ?? '#'}
@@ -274,7 +339,7 @@ const principles = [
 
             {/* Miniatura */}
             {p.previewImage ? (
-              <div class="relative h-40 overflow-hidden">
+              <div class="relative h-44 overflow-hidden">
                 <img
                   src={p.previewImage}
                   alt={`Vista previa de ${p.name}`}
@@ -296,7 +361,7 @@ const principles = [
               </div>
             ) : (
               <div
-                class="relative h-40 overflow-hidden"
+                class="relative h-44 overflow-hidden"
                 style={`background:${p.imageGradient}`}
                 aria-hidden="true"
               >
@@ -323,7 +388,7 @@ const principles = [
               </div>
             )}
 
-            {/* Info */}
+            {/* Cuerpo */}
             <div class="p-5">
               <p class="font-mono text-[10px] tracking-wider text-[var(--color-muted)] uppercase dark:text-[var(--color-muted-dark)]">
                 {p.category}
@@ -332,7 +397,7 @@ const principles = [
               <p class="mt-1 font-serif text-xs text-[var(--color-accent)] italic">"{p.tagline}"</p>
 
               <div class="relative z-20 mt-4 flex items-center justify-between">
-                <ul class="flex flex-wrap gap-1.5">
+                <ul class="flex flex-wrap gap-2">
                   {p.stack.slice(0, 4).map((s) => {
                     const tech = techIconMap.get(s);
                     const src = tech
@@ -380,14 +445,14 @@ const principles = [
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SOBRE MÍ
+       SOBRE MÍ — fondo surface (sección alterna)
   ════════════════════════════════════════════════════════════ -->
   <section
     id="sobre-mi"
     aria-labelledby="about-title"
-    class="border-t border-[var(--color-border)] py-20 dark:border-[var(--color-border-dark)]"
+    class="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-20 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
   >
-    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_380px] lg:gap-16">
+    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
       <div>
         <p
           class="reveal mb-3 font-mono text-xs tracking-wider text-[var(--color-accent)] uppercase"
@@ -439,7 +504,7 @@ const principles = [
       <!-- Foto -->
       <div class="reveal relative lg:sticky lg:top-24">
         <div
-          class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-border-dark)]"
+          class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-border)] dark:border-[var(--color-border-dark)] dark:bg-[var(--color-border-dark)]"
         >
           <img
             src="/juan-sebastian.webp"
@@ -478,7 +543,7 @@ const principles = [
         </h2>
       </div>
       <p class="max-w-xs text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-        Sin costes ocultos. Precio final acordado antes de empezar.
+        Sin costes ocultos. Precio acordado antes de empezar.
       </p>
     </div>
 
@@ -486,7 +551,7 @@ const principles = [
       {
         services.map((s, i) => (
           <li
-            class={`reveal reveal-delay-${Math.min(i, 3)} flex flex-wrap items-center gap-6 py-8`}
+            class={`reveal reveal-delay-${Math.min(i, 3)} group -mx-4 flex flex-wrap items-center gap-6 rounded-xl px-4 py-8 transition-colors hover:bg-[var(--color-surface)] dark:hover:bg-[var(--color-surface-dark)]`}
           >
             <span class="big-number w-10 shrink-0 text-4xl leading-none tabular-nums">{s.no}</span>
             <div class="flex flex-1 flex-wrap items-baseline gap-x-5 gap-y-1">
@@ -498,8 +563,8 @@ const principles = [
             <div class="flex items-center gap-4 text-right">
               <div>
                 <p class="italic-accent text-xl">
-                  {s.price}{' '}
-                  <span class="font-sans text-xs text-[var(--color-muted)] not-italic">COP</span>
+                  {s.price}
+                  <span class="font-sans text-xs text-[var(--color-muted)] not-italic"> COP</span>
                 </p>
                 <p class="mt-0.5 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
                   {s.duration}
@@ -518,12 +583,12 @@ const principles = [
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       CONTACTO
+       CONTACTO — fondo surface (sección alterna)
   ════════════════════════════════════════════════════════════ -->
   <section
     id="contacto"
     aria-labelledby="contact-title"
-    class="border-t border-[var(--color-border)] py-20 dark:border-[var(--color-border-dark)]"
+    class="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-20 dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
   >
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
       <!-- Left: copy -->
@@ -549,8 +614,9 @@ const principles = [
               <a
                 href="mailto:jsogfd@gmail.com"
                 class="text-[var(--color-fg)] transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-fg-dark)]"
-                >jsogfd@gmail.com</a
               >
+                jsogfd@gmail.com
+              </a>
             </dd>
           </div>
           <div class="flex items-center gap-3">
@@ -565,8 +631,9 @@ const principles = [
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-[var(--color-fg)] transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-fg-dark)]"
-                >github.com/sogom01</a
               >
+                github.com/sogom01
+              </a>
             </dd>
           </div>
           <div class="flex items-center gap-3">
@@ -589,8 +656,8 @@ const principles = [
             class="mb-6 rounded-md border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"
             role="alert"
           >
-            Este formulario requiere JavaScript para la verificación anti-bot. Por favor, actívalo o
-            escríbeme directamente al correo.
+            Este formulario requiere JavaScript. Por favor actívalo o escríbeme directamente al
+            correo.
           </p>
         </noscript>
 
@@ -606,9 +673,9 @@ const principles = [
 
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label for="name" class="block text-sm font-medium"
-                >Nombre <span aria-hidden="true" class="text-[var(--color-accent)]">*</span></label
-              >
+              <label for="name" class="block text-sm font-medium">
+                Nombre <span aria-hidden="true" class="text-[var(--color-accent)]">*</span>
+              </label>
               <input
                 id="name"
                 name="name"
@@ -619,14 +686,14 @@ const principles = [
                 maxlength="80"
                 aria-required="true"
                 aria-describedby="name-error"
-                class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+                class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
               />
               <p id="name-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
             </div>
             <div>
-              <label for="email" class="block text-sm font-medium"
-                >Correo <span aria-hidden="true" class="text-[var(--color-accent)]">*</span></label
-              >
+              <label for="email" class="block text-sm font-medium">
+                Correo <span aria-hidden="true" class="text-[var(--color-accent)]">*</span>
+              </label>
               <input
                 id="email"
                 name="email"
@@ -636,16 +703,16 @@ const principles = [
                 maxlength="200"
                 aria-required="true"
                 aria-describedby="email-error"
-                class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+                class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
               />
               <p id="email-error" class="mt-1 hidden text-sm text-red-600" role="alert"></p>
             </div>
           </div>
 
           <div>
-            <label for="message" class="block text-sm font-medium"
-              >Mensaje <span aria-hidden="true" class="text-[var(--color-accent)]">*</span></label
-            >
+            <label for="message" class="block text-sm font-medium">
+              Mensaje <span aria-hidden="true" class="text-[var(--color-accent)]">*</span>
+            </label>
             <textarea
               id="message"
               name="message"
@@ -655,7 +722,7 @@ const principles = [
               maxlength="2000"
               aria-required="true"
               aria-describedby="message-error message-hint"
-              class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-dark)]"
+              class="mt-1.5 block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-2.5 text-sm shadow-sm transition-colors focus:border-[var(--color-accent)] focus:outline-none dark:border-[var(--color-border-dark)] dark:bg-[var(--color-bg-dark)]"
             ></textarea>
             <p
               id="message-hint"
@@ -699,8 +766,10 @@ const principles = [
   </section>
 </BaseLayout>
 
+<!-- Turnstile -->
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
+<!-- Formulario -->
 <script is:inline>
   (function () {
     const form = document.getElementById('contact-form');
@@ -754,3 +823,54 @@ const principles = [
     });
   })();
 </script>
+
+<!-- Scroll-spy: ilumina el ítem de nav según la sección visible -->
+<script is:inline>
+  (function () {
+    const sections = ['sobre-mi', 'proyectos', 'servicios', 'contacto'];
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            const isActive = link.getAttribute('href') === '#' + id;
+            link.classList.toggle('text-[var(--color-fg)]', isActive);
+            link.classList.toggle('dark:text-[var(--color-fg-dark)]', isActive);
+            link.classList.toggle('text-[var(--color-muted)]', !isActive);
+            link.classList.toggle('dark:text-[var(--color-muted-dark)]', !isActive);
+            // número
+            const num = link.querySelector('span');
+            if (num) {
+              num.classList.toggle('text-[var(--color-accent)]', isActive);
+              num.classList.toggle('text-[var(--color-muted)]/50', !isActive);
+            }
+          });
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  })();
+</script>
+
+<!-- Animación pulse-dot (inline para no depender de Tailwind arbitrary) -->
+<style is:inline>
+  @keyframes pulse-dot {
+    0% {
+      box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55);
+    }
+    70% {
+      box-shadow: 0 0 0 7px rgba(220, 38, 38, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+  }
+</style>
