@@ -267,26 +267,36 @@ const marqueeItems: MarqueeItem[] = [
           <p class="mb-5 font-mono text-[11px] tracking-wider text-[var(--color-accent)] uppercase">
             // Lo que incluye
           </p>
-          <ul class="space-y-3.5">
+          <ul class="space-y-2">
             {
               [
-                { icon: '⚡', text: 'Entrega en 1–4 semanas' },
-                { icon: '🔒', text: 'Seguridad OWASP incluida' },
-                { icon: '📱', text: '100% responsive' },
-                { icon: '💬', text: 'Soporte post-entrega' },
+                { icon: '⚡', text: 'Entrega en 1–4 semanas', sub: 'Sin plazos eternos' },
+                { icon: '🔒', text: 'Seguridad OWASP', sub: 'Desde el primer commit' },
+                { icon: '📱', text: '100% responsive', sub: 'Mobile, tablet y desktop' },
+                { icon: '💬', text: 'Soporte post-entrega', sub: 'No desaparezco al subir' },
               ].map((item) => (
-                <li class="flex items-center gap-3 text-sm text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
-                  <span class="text-base leading-none" aria-hidden="true">
+                <li class="flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-[var(--color-bg)] dark:hover:bg-[var(--color-bg-dark)]">
+                  <span
+                    class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent)]/10 text-sm"
+                    aria-hidden="true"
+                  >
                     {item.icon}
                   </span>
-                  {item.text}
+                  <div>
+                    <p class="text-sm font-medium text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+                      {item.text}
+                    </p>
+                    <p class="text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                      {item.sub}
+                    </p>
+                  </div>
                 </li>
               ))
             }
           </ul>
           <a
             href="#servicios"
-            class="mt-5 block text-right font-mono text-[11px] tracking-wider text-[var(--color-muted)] uppercase transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-muted-dark)]"
+            class="mt-3 block text-right font-mono text-[11px] tracking-wider text-[var(--color-muted)] uppercase transition-colors hover:text-[var(--color-accent)] dark:text-[var(--color-muted-dark)]"
           >
             Ver servicios →
           </a>
@@ -297,36 +307,8 @@ const marqueeItems: MarqueeItem[] = [
     <!-- Espaciador flexible: empuja marquee y chevron al fondo -->
     <div class="flex-1" aria-hidden="true"></div>
 
-    <!-- Marquee de tecnologías -->
-    <div
-      class="fade-in-up fade-in-up-delay-3 relative z-10 overflow-hidden border-y border-[var(--color-border)] py-3 dark:border-[var(--color-border-dark)]"
-      aria-hidden="true"
-    >
-      <div class="marquee-track">
-        {
-          [...marqueeItems, ...marqueeItems].map((item) => (
-            <span class="mx-5 inline-flex items-center gap-2 whitespace-nowrap">
-              {item.slug && (
-                <img
-                  src={`https://cdn.simpleicons.org/${item.slug}${item.color ? '/' + item.color : ''}`}
-                  alt=""
-                  width="14"
-                  height="14"
-                  class:list={['h-3.5 w-3.5 shrink-0', { 'dark:invert': item.invertDark }]}
-                  loading="lazy"
-                />
-              )}
-              <span class="font-mono text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-                {item.name}
-              </span>
-            </span>
-          ))
-        }
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="relative z-10 flex justify-center py-2" aria-hidden="true">
+    <!-- Scroll indicator — siempre al fondo del hero -->
+    <div class="relative z-10 flex justify-center pt-2 pb-3" aria-hidden="true">
       <a
         href="#proyectos"
         class="bounce-chevron text-[var(--color-muted)]/50 dark:text-[var(--color-muted-dark)]/50"
@@ -343,6 +325,36 @@ const marqueeItems: MarqueeItem[] = [
       </a>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MARQUEE — banda de tecnologías (entre hero y proyectos)
+  ════════════════════════════════════════════════════════════ -->
+  <div
+    class="-mx-4 overflow-hidden border-y border-[var(--color-border)] py-3 sm:-mx-6 lg:-mx-8 dark:border-[var(--color-border-dark)]"
+    aria-hidden="true"
+  >
+    <div class="marquee-track">
+      {
+        [...marqueeItems, ...marqueeItems].map((item) => (
+          <span class="mx-5 inline-flex items-center gap-2 whitespace-nowrap">
+            {item.slug && (
+              <img
+                src={`https://cdn.simpleicons.org/${item.slug}${item.color ? '/' + item.color : ''}`}
+                alt=""
+                width="14"
+                height="14"
+                class:list={['h-3.5 w-3.5 shrink-0', { 'dark:invert': item.invertDark }]}
+                loading="lazy"
+              />
+            )}
+            <span class="font-mono text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {item.name}
+            </span>
+          </span>
+        ))
+      }
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════════
        PROYECTOS — grid 3 col con grayscale hover
