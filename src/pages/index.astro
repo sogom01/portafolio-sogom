@@ -208,7 +208,7 @@ const marqueeItems: MarqueeItem[] = [
     class="hero-grid relative flex min-h-[calc(100svh-3.5rem)] flex-col pt-6 sm:pt-8"
   >
     <div
-      class="relative z-10 grid grid-cols-1 items-start gap-10 pb-10 lg:grid-cols-[1fr_260px] lg:gap-14"
+      class="relative z-10 grid grid-cols-1 items-start gap-10 pb-10 lg:grid-cols-[1fr_300px] lg:gap-14"
     >
       <!-- Columna izquierda: texto principal -->
       <div>
@@ -267,7 +267,7 @@ const marqueeItems: MarqueeItem[] = [
           <p class="mb-5 font-mono text-[11px] tracking-wider text-[var(--color-accent)] uppercase">
             // Lo que incluye
           </p>
-          <ul class="space-y-2">
+          <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
             {
               [
                 { icon: '⚡', text: 'Entrega en 1–4 semanas', sub: 'Sin plazos eternos' },
@@ -275,11 +275,8 @@ const marqueeItems: MarqueeItem[] = [
                 { icon: '📱', text: '100% responsive', sub: 'Mobile, tablet y desktop' },
                 { icon: '💬', text: 'Soporte post-entrega', sub: 'No desaparezco al subir' },
               ].map((item) => (
-                <li class="flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-[var(--color-bg)] dark:hover:bg-[var(--color-bg-dark)]">
-                  <span
-                    class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent)]/10 text-sm"
-                    aria-hidden="true"
-                  >
+                <li class="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
+                  <span class="text-lg leading-none" aria-hidden="true">
                     {item.icon}
                   </span>
                   <div>
@@ -304,57 +301,54 @@ const marqueeItems: MarqueeItem[] = [
       </div>
     </div>
 
-    <!-- Espaciador mínimo entre contenido y chevron -->
-    <div class="h-8" aria-hidden="true"></div>
-
-    <!-- Scroll indicator — siempre al fondo del hero -->
-    <div class="relative z-10 flex justify-center pt-2 pb-3" aria-hidden="true">
-      <a
-        href="#proyectos"
-        class="bounce-chevron text-[var(--color-muted)]/50 dark:text-[var(--color-muted-dark)]/50"
+    <!-- Marquee + chevron agrupados al fondo del hero -->
+    <div class="mt-8">
+      <!-- Banda de tecnologías -->
+      <div
+        class="-mx-4 overflow-hidden border-y border-[var(--color-border)] py-3 sm:-mx-6 lg:-mx-8 dark:border-[var(--color-border-dark)]"
+        aria-hidden="true"
       >
-        <svg
-          class="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
+        <div class="marquee-track">
+          {
+            [...marqueeItems, ...marqueeItems].map((item) => (
+              <span class="mx-5 inline-flex items-center gap-2 whitespace-nowrap">
+                {item.slug && (
+                  <img
+                    src={`https://cdn.simpleicons.org/${item.slug}${item.color ? '/' + item.color : ''}`}
+                    alt=""
+                    width="14"
+                    height="14"
+                    class:list={['h-3.5 w-3.5 shrink-0', { 'dark:invert': item.invertDark }]}
+                    loading="lazy"
+                  />
+                )}
+                <span class="font-mono text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                  {item.name}
+                </span>
+              </span>
+            ))
+          }
+        </div>
+      </div>
+      <!-- Scroll indicator -->
+      <div class="relative z-10 flex justify-center py-2" aria-hidden="true">
+        <a
+          href="#proyectos"
+          class="bounce-chevron text-[var(--color-muted)]/50 dark:text-[var(--color-muted-dark)]/50"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"></path>
-        </svg>
-      </a>
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"></path>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       MARQUEE — banda de tecnologías (entre hero y proyectos)
-  ════════════════════════════════════════════════════════════ -->
-  <div
-    class="-mx-4 overflow-hidden border-y border-[var(--color-border)] py-3 sm:-mx-6 lg:-mx-8 dark:border-[var(--color-border-dark)]"
-    aria-hidden="true"
-  >
-    <div class="marquee-track">
-      {
-        [...marqueeItems, ...marqueeItems].map((item) => (
-          <span class="mx-5 inline-flex items-center gap-2 whitespace-nowrap">
-            {item.slug && (
-              <img
-                src={`https://cdn.simpleicons.org/${item.slug}${item.color ? '/' + item.color : ''}`}
-                alt=""
-                width="14"
-                height="14"
-                class:list={['h-3.5 w-3.5 shrink-0', { 'dark:invert': item.invertDark }]}
-                loading="lazy"
-              />
-            )}
-            <span class="font-mono text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-              {item.name}
-            </span>
-          </span>
-        ))
-      }
-    </div>
-  </div>
 
   <!-- ═══════════════════════════════════════════════════════════
        PROYECTOS — grid 3 col con grayscale hover
